@@ -1,0 +1,400 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Git - Qu Blog
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="Qu Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">Qu Blog</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Qu Blog</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>Hexo</label></li>
+
+          
+            <li><a title="Hexo安装和部署" href="15247480658840.html">Hexo安装和部署</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>Git</label></li>
+
+          
+            <li><a title="Git常用命令" href="15247482527226.html">Git常用命令</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>正则</label></li>
+
+          
+            <li><a title="常用正则表达式" href="15247482751395.html">常用正则表达式</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>SSR</label></li>
+
+          
+            <li><a title="CentOS下部署SSR" href="15247483205460.html">CentOS下部署SSR</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>Hexo</span></li>
+                        
+                          <li><a title="Hexo安装和部署" href="15247480658840.html">Hexo安装和部署</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>Git</span></li>
+                        
+                          <li><a title="Git常用命令" href="15247482527226.html">Git常用命令</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>正则</span></li>
+                        
+                          <li><a title="常用正则表达式" href="15247482751395.html">常用正则表达式</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>SSR</span></li>
+                        
+                          <li><a title="CentOS下部署SSR" href="15247483205460.html">CentOS下部署SSR</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ 
+
+
+	
+		<div class="markdown-body">
+		<h1>Git常用命令</h1>
+
+		<h2 id="toc_0">配置</h2>
+
+<h3 id="toc_1">全局配置</h3>
+
+<pre><code class="language-bash">git config --global user.name &quot;Qu&quot;
+git config --global user.email &quot;EvanQu@outlook.com&quot;
+</code></pre>
+
+<h2 id="toc_2">基本</h2>
+
+<h3 id="toc_3">初始化Git仓库</h3>
+
+<pre><code class="language-bash">git init
+</code></pre>
+
+<h3 id="toc_4">添加文件</h3>
+
+<pre><code class="language-bash">git add files
+git add . 
+</code></pre>
+
+<p>. 添加全部文件</p>
+
+<h3 id="toc_5">提交文件</h3>
+
+<pre><code class="language-bash">git commit -m &quot;注释说明&quot;
+</code></pre>
+
+<h3 id="toc_6">查看Git当前状态</h3>
+
+<pre><code class="language-bash">git status 
+</code></pre>
+
+<h3 id="toc_7">查看文件修改内容</h3>
+
+<pre><code class="language-bash">git diff 
+</code></pre>
+
+<h3 id="toc_8">查看提交记录</h3>
+
+<pre><code class="language-bash">git log --pretty=oneline
+</code></pre>
+
+<p>--pretty=oneline简化信息</p>
+
+<h3 id="toc_9">返回某个版本</h3>
+
+<pre><code class="language-bash">git reset --hard HEAD^
+git reset __hard
+</code></pre>
+
+<p>HEAD<sup>上一个版本</sup> HEAD<sup><sup>上上一个版本</sup></sup></p>
+
+<h3 id="toc_10">查看操作命令记录</h3>
+
+<pre><code class="language-bash">git reflog
+</code></pre>
+
+<h3 id="toc_11">撤销工作区的修改</h3>
+
+<pre><code class="language-bash">git chekout --
+</code></pre>
+
+<h3 id="toc_12">删除文件</h3>
+
+<pre><code class="language-bash">git rm
+</code></pre>
+
+<h2 id="toc_13">远程</h2>
+
+<h3 id="toc_14">创建SSH Key</h3>
+
+<pre><code class="language-bash">ssh-keygen -t rsa -C &quot;EvanQu@outlook.com&quot;
+</code></pre>
+
+<h3 id="toc_15">查看远程库信息</h3>
+
+<pre><code class="language-bash">git remote -v
+</code></pre>
+
+<h3 id="toc_16">添加远程仓库</h3>
+
+<pre><code class="language-bash">git remote add origin
+git@github.com:happyququ/learngit.git
+</code></pre>
+
+<h3 id="toc_17">第一次推送</h3>
+
+<pre><code class="language-bash">git push -u origin master
+</code></pre>
+
+<h3 id="toc_18">推送到远程库</h3>
+
+<pre><code class="language-bash">git push
+</code></pre>
+
+<h3 id="toc_19">推送到远程库分支</h3>
+
+<pre><code class="language-bash">git push origin
+</code></pre>
+
+<h3 id="toc_20">服务器拉取</h3>
+
+<pre><code class="language-bash">git pull
+</code></pre>
+
+<h3 id="toc_21">克隆仓库</h3>
+
+<pre><code class="language-bash">git clone
+git@github.com:happyququ/learninggit.git
+</code></pre>
+
+<h3 id="toc_22">本地创建与远程库分支对应的分支</h3>
+
+<pre><code class="language-bash">git
+checkout -b origin/
+</code></pre>
+
+<h3 id="toc_23">本地分支与远程分支关联</h3>
+
+<pre><code class="language-bash">git branch --set-upstream origin/
+</code></pre>
+
+<h2 id="toc_24">分支</h2>
+
+<h3 id="toc_25">查看分支</h3>
+
+<pre><code class="language-bash">git branch
+</code></pre>
+
+<h3 id="toc_26">创建分支</h3>
+
+<pre><code class="language-bash">git branch
+</code></pre>
+
+<h3 id="toc_27">切换分支</h3>
+
+<pre><code class="language-bash">git checkout
+</code></pre>
+
+<h3 id="toc_28">创建并切换分支</h3>
+
+<pre><code class="language-bash">git checkout -b
+</code></pre>
+
+<h3 id="toc_29">合并某个分支到当前分支</h3>
+
+<pre><code class="language-bash">git merge
+</code></pre>
+
+<p>合并就看不出来曾经做过合并</p>
+
+<h3 id="toc_30">删除分支</h3>
+
+<pre><code class="language-bash">git branch -d
+</code></pre>
+
+<h3 id="toc_31">强行删除分支</h3>
+
+<pre><code class="language-bash">git branch -D
+</code></pre>
+
+<h3 id="toc_32">查看分支合并图</h3>
+
+<pre><code class="language-bash">git -log --graph
+</code></pre>
+
+<h3 id="toc_33">合并分支保留分支信息</h3>
+
+<pre><code class="language-bash">git merge --no-ff -m &quot;&quot;
+</code></pre>
+
+<p>合并后的历史有分支,能看出来曾经做过合并 ### 隐藏当前工作区</p>
+
+<pre><code class="language-bash">git stash
+</code></pre>
+
+<h3 id="toc_34">显示隐藏的工作区</h3>
+
+<pre><code class="language-bash">git stash list
+</code></pre>
+
+<h3 id="toc_35">恢复隐藏的工作区</h3>
+
+<pre><code class="language-bash">git stash pop
+</code></pre>
+
+<h2 id="toc_36">标签</h2>
+
+<h3 id="toc_37">新建标签</h3>
+
+<pre><code class="language-bash">git tag
+</code></pre>
+
+<h3 id="toc_38">指定标签信息</h3>
+
+<pre><code class="language-bash">git tag -a -m &quot;&quot;
+</code></pre>
+
+<h3 id="toc_39">查看所有标签</h3>
+
+<pre><code class="language-bash">git tag
+</code></pre>
+
+<h3 id="toc_40">推送一个本地标签</h3>
+
+<pre><code class="language-bash">git push origin
+</code></pre>
+
+<h3 id="toc_41">推送全部标签</h3>
+
+<pre><code class="language-bash">git push origin --tags
+</code></pre>
+
+<h3 id="toc_42">删除本地标签</h3>
+
+<pre><code class="language-bash">git tag -d
+</code></pre>
+
+<h3 id="toc_43">删除远程标签</h3>
+
+<pre><code class="language-bash">push origin :refs/tags/
+</code></pre>
+
+<h3 id="toc_44">显示颜色</h3>
+
+<pre><code class="language-bash">git config --global color.ui true
+</code></pre>
+
+
+		</div>
+	
+
+  
+  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>
