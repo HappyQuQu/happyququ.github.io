@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  CentOS下部署SSR - Qu Blog
+  Mac - Qu Blog
   
   </title>
  <meta name="description" content="">
@@ -153,147 +153,35 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- <div class="markdown-body">
-<h1>CentOS下部署SSR</h1>
+ 
 
-<h2 id="toc_0">SSR一键安装包</h2>
 
-<p>下载脚本</p>
+	
+		<div class="markdown-body">
+		<h1>macOS U盘安装盘制作</h1>
 
-<pre><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+		<ol>
+<li>将系统安装文件重命名为Install macOS.app</li>
+<li>将U盘格式化成OSX拓展格式并重命名为macOS</li>
+<li>制作macOS安装盘</li>
+</ol>
+
+<pre><code class="language-bash">sudo /Applications/&#39;Install macOS High Sierra.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/&#39;macOS&#39; --applicationpath /Applications/&#39;Install macOS High Sierra.app&#39;
 </code></pre>
 
-<p>安装完成后</p>
+<p>PS:</p>
 
-<p><img src="media/15096861453670/14741174149723.jpg" alt="预览"/></p>
+<p>如果出现权限不够</p>
 
-<p>该脚本已经自动将 Shadowsocks 加入开机自启，安装完成 Shadowsocks 就已经启动了。</p>
-
-<h3 id="toc_1">Shadowsocks配置文件</h3>
-
-<pre><code class="language-bash">/etc/shadowsocks.json
+<pre><code class="language-bash">sudo chmod +x /Applications/&#39;Install macOS.app&#39;/Contents/Resources/createinstallmedia
 </code></pre>
 
-<h3 id="toc_2">其他命令</h3>
 
-<ul>
-<li>卸载</li>
-</ul>
+		</div>
+	
 
-<pre><code class="language-bash">./shadowsocksR.sh uninstall
-</code></pre>
-
-<ul>
-<li>启动</li>
-</ul>
-
-<pre><code class="language-bash">/etc/init.d/shadowsocks start
-</code></pre>
-
-<ul>
-<li>停止</li>
-</ul>
-
-<pre><code class="language-bash">/etc/init.d/shadowsocks stop
-</code></pre>
-
-<ul>
-<li>重启</li>
-</ul>
-
-<pre><code class="language-bash">/etc/init.d/shadowsocks restart
-</code></pre>
-
-<ul>
-<li>状态</li>
-</ul>
-
-<pre><code class="language-bash">/etc/init.d/shadowsocks status
-</code></pre>
-
-<h3 id="toc_3">为Shadowsocks添加多个端口和密码</h3>
-
-<p>如果你想将 Shadowsocks 账号出售给其他人,或者希望将账号共享给朋友,又不想和他使用同一个密码,那么你就需要给 Shadowsocks添加多个端口和密码,具体还是需要修改 Shadowsocks的配置文件:</p>
-
-<p>默认的单个端口的配置文件如下:</p>
-
-<pre><code class="language-json">{
- &quot;server&quot;:&quot;0.0.0.0&quot;,
- &quot;server_ipv6&quot;:&quot;::&quot;,
- &quot;server_port&quot;:8001,
- &quot;local_address&quot;:&quot;127.0.0.1&quot;,
- &quot;local_port&quot;:1080,
- &quot;password&quot;:&quot;123456&quot;,
- &quot;timeout&quot;:120,
- &quot;method&quot;:&quot;chacha20&quot;,
- &quot;protocol&quot;:&quot;origin&quot;,
- &quot;protocol_param&quot;:&quot;&quot;,
- &quot;obfs&quot;:&quot;plain&quot;,
- &quot;obfs_param&quot;:&quot;&quot;,
- &quot;redirect&quot;:&quot;&quot;,
- &quot;dns_ipv6&quot;:false,
- &quot;fast_open&quot;:false,
- &quot;workers&quot;:1
-}
-</code></pre>
-
-<p>你需要将其中的<code>server_port</code>和<code>password</code>删掉,并且添加<code>port_password</code>的字段:</p>
-
-<pre><code class="language-json">    &quot;port_password&quot;: {
-        &quot;8001&quot;: {
-            &quot;protocol&quot;: &quot;auth_sha1_v2_compatible&quot;,
-            &quot;password&quot;: &quot;12345&quot;,
-            &quot;obfs&quot;: &quot;tls1.2_ticket_auth_compatible&quot;,
-            &quot;obfs_param&quot;: &quot;&quot;
-        },
-        &quot;8002&quot;:&quot;password2&quot;,
-        &quot;8003&quot;:&quot;password3&quot;
-    },
-</code></pre>
-
-<p>修改好之后，重启 Shadowsocks</p>
-
-<p>Shadowsocks 算是安装好了，不过速度很不理想，我们可以使用 ServerSpeeder 对它进行加速。</p>
-
-
-</div>
-
-<br /><br />
-<hr />
-
-<div class="row clearfix">
-  <div class="large-6 columns">
-	<div class="text-left" style="padding:15px 0px;">
-		
-	        <a href="15247501426506.html"  title="Previous Post: CentOS安装TCP-BBR">&laquo; CentOS安装TCP-BBR</a>
-	    
-	</div>
-  </div>
-  <div class="large-6 columns">
-	<div class="text-right" style="padding:15px 0px;">
-		
-	        <a href="15247482751395.html" 
-	        title="Next Post: 常用正则表达式">常用正则表达式 &raquo;</a>
-	    
-	</div>
-  </div>
-</div>
-
-<div class="row">
-<div style="padding:0px 0.93em;" class="share-comments">
-
-</div>
-</div>
-<script type="text/javascript">
-	$(function(){
-		var currentURL = '15247483205460.html';
-		$('#side-nav a').each(function(){
-			if($(this).attr('href') == currentURL){
-				$(this).parent().addClass('active');
-			}
-		});
-	});
-</script>  
+  
+  
 </div></div>
 
 

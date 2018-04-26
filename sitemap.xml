@@ -2,7 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://blog.qudev.top/</loc>
-  <lastmod>2018-04-26T21:34:15+08:00</lastmod>
+  <lastmod>2018-04-26T21:45:15+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://blog.qudev.top/15247502619814.html</loc>
+  <lastmod>2018-04-26T21:44:21+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://blog.qudev.top/15247502067836.html</loc>
+  <lastmod>2018-04-26T21:43:26+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://blog.qudev.top/15247501426506.html</loc>
+  <lastmod>2018-04-26T21:42:22+08:00</lastmod>
 </url>
 
 <url>
@@ -41,6 +56,14 @@
 
 <url>
   <loc>http://blog.qudev.top/SSR.html</loc>
+</url>
+
+<url>
+  <loc>http://blog.qudev.top/Mac.html</loc>
+</url>
+
+<url>
+  <loc>http://blog.qudev.top/Linux.html</loc>
 </url>
 
 
