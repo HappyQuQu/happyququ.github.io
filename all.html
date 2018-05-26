@@ -93,6 +93,14 @@
           
 
       
+        <li class="divider"></li>
+        <li><label>Android</label></li>
+
+          
+            <li><a title="Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案" href="15273352175202.html">Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案</a></li>
+          
+
+      
       </ul>
     </aside>
 
@@ -146,6 +154,12 @@
                         
 
                     
+                      <li class="side-title"><span>Android</span></li>
+                        
+                          <li><a title="Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案" href="15273352175202.html">Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案</a></li>
+                        
+
+                    
                   </ul>
                 </nav>
                 </div>
@@ -158,81 +172,15 @@
 
 	
 		<div class="markdown-body">
-		<h1>Ubuntu双网卡配置</h1>
+		<h1>Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案</h1>
 
-		<h2 id="toc_0">Ubuntu 17.10双网卡配置</h2>
-
-<p>Ubuntu网络配置多年来一直在用NetworkManager,ifupdown等工具. 17.10引入netplan作为在Ubuntu中配置接口的标准声明性YAML语法</p>
-
-<p>Ubuntu 17.10版本修改网络固定IP的方法跟其他版本不一样 不需要修改<code>/etc/network/interfaces</code>文件,而是通过在<code>/etc/netplan/</code>下创建一个自定义YAML配置文件来实现</p>
-
-<h3 id="toc_1">创建一个YAML文件</h3>
-
-<pre><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
-</code></pre>
-
-<p>以我的配置为例,我的第二个网卡名称是<code>enp0s8</code>,设置成固定IP方便宿主机SSH远程</p>
-
-<p>YAML内容:</p>
-
-<pre><code># This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp0s8:
-      dhcp4: no
-      addresses: [192.168.56.2/24]
-</code></pre>
-
-<p>确认配置并重启</p>
-
-<pre><code class="language-bash">sudo netplan apply
-sudo init 6 
-</code></pre>
-
-<h2 id="toc_2">Ubuntu 17.10以下双网卡配置</h2>
-
-<h3 id="toc_3">修改Ubuntu的网络配置文件</h3>
-
-<pre><code class="language-bash">sudo vim /etc/network/interfaces
-</code></pre>
-
-<p>配置如下</p>
-
-<pre><code class="language-bash"># The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-auto eth0
-iface eth0 inet dhcp
-
-#the second eth1
-auto eth1
-iface eth1 inet static
-address 192.168.56.2
-netmask 255.255.255.0
-</code></pre>
-
-<ul>
-<li>eth0为NAT模式的网卡,eth1为Host-only的网卡</li>
-<li>主机和虚拟机通信用192.168.56.*这个网段</li>
-</ul>
-
-<p>重启虚拟机</p>
-
-<h2 id="toc_4">参考</h2>
-
-<p><a href="https://websiteforstudents.com/configuring-static-ips-ubuntu-17-10-servers/">CONFIGURING STATIC IP ADDRESSES ON UBUNTU 17.10 SERVERS</a></p>
-
-<p><a href="https://wiki.ubuntu.com/Netplan">NetPlan</a></p>
-
-<p><a href="http://www.linuxidc.com/Linux/2017-10/148112.htm">Ubuntu17.10新特性</a></p>
+		<p>在cmd中输入<code>db nodaemon server -a</code></p>
 
 
 		</div>
+	
+
+ 
 	
 
  
