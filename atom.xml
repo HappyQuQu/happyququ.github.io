@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-  <updated>2018-05-26T19:47:06+08:00</updated>
+  <updated>2018-05-26T19:47:09+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://www.mweb.im">MWeb</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[修复下载文件夹变英文]]></title>
+    <link href="http://blog.qudev.top/15276843925995.html"/>
+    <updated>2018-05-30T20:46:32+08:00</updated>
+    <id>http://blog.qudev.top/15276843925995.html</id>
+    <content type="html"><![CDATA[
+<p>下载文件夹变成了 Downloads，在终端中运行<code>touch ~/Downloads/.localized</code>，重启 Finder （按住 ⌥ 在 dock 的 Finder 上右键）修好了。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案]]></title>
