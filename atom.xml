@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Qu Blog]]></title>
+  <link href="http://blog.qudev.top/atom.xml" rel="self"/>
+  <link href="http://blog.qudev.top/"/>
+  <updated>2018-07-04T21:15:20+08:00</updated>
+  <id>http://blog.qudev.top/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派下搭建PT/BT下载器]]></title>
+    <link href="http://blog.qudev.top/15291175282135.html"/>
+    <updated>2018-06-16T10:52:08+08:00</updated>
+    <id>http://blog.qudev.top/15291175282135.html</id>
+    <content type="html"><![CDATA[
+<p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件</p>
+
+<h2 id="toc_0">安装Transminssion</h2>
+
+<p>一般默认的源里面就有所以直接下载</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo apt-get update
+sudo apt-get install -y transmission-daemon
+</code></pre>
+
+<h2 id="toc_1">修改默认配置文件</h2>
+
+<pre class="line-numbers"><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+</code></pre>
+
+<p>配置比较多但是其实只要配置几个关键的点就行了</p>
+
+<h4 id="toc_2">下载目录</h4>
+
+<p>我的下载目录是挂载的一块3T的硬盘</p>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+</code></pre>
+
+<h4 id="toc_3">未完成目录</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+</code></pre>
+
+<h4 id="toc_4">远程控制管理</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+&quot;rpc-whitelist-enabled&quot;: false,
+</code></pre>
+
+<p>如果想指定特定IP管理的话可以把<code>rpc-whitelist</code>设置成<code>192.168.1.*</code>.<br/>
+我的话没有修改,而是直接把<code>rpc-whitelist-enabled</code>改成<code>false</code>,这样就不走白名单模式</p>
+
+<h4 id="toc_5">远程用户名密码</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
+&quot;rpc-password&quot;: &quot;123456&quot;,
+</code></pre>
+
+<p>密码是加密的,没关系直接把密码改为你想要的密码明文就可以,重启服务后会自动帮你加密</p>
+
+<h4 id="toc_6">重载配置和服务</h4>
+
+<pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
+sudo service transmission-daemon restart
+</code></pre>
+
+<p>注意以下两个命令按顺序执行,单独restart的话配置不会保存</p>
+
+<h2 id="toc_7">远程管理</h2>
+
+<p>浏览器中访问IP加9091端口：比如:<a href="http://192.168.1.200:9091/">http://192.168.1.200:9091/</a>.<br/>
+输入你配置的用户名密码直接可以程管理</p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.14.12.png" alt="屏幕快照 2018-06-16 11.14.12"/></p>
+
+<p>网页管理比较简单,我一般都是用远程客户端管理的</p>
+
+<h4 id="toc_8">桌面客户端</h4>
+
+<p>Mac和Win可以用开源的TransGUI来管理,下载地址:<a href="https://github.com/transmission-remote-gui/transgui/releases">点我</a> </p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.19.44.png" alt="屏幕快照 2018-06-16 11.19.44"/></p>
+
+<h4 id="toc_9">Android客户端</h4>
+
+<p>安卓的话我用Transmission Remote,下载地址:<a href="https://play.google.com/store/apps/details?id=net.yupol.transmissionremote.app">点我</a></p>
+
+<p><img src="media/15291175282135/unnamed.png" alt="unnamed"/></p>
+
+<p>貌似Transdroid也不错,下载地址:<a href="http://www.transdroid.org">点我</a><br/>
+<img src="media/15291175282135/transdroid-2.5.1-main-576x1024.png" alt="transdroid-2.5.1-main-576x1024"/></p>
+
+<h4 id="toc_10">外网管理</h4>
+
+<p>如果想外网管理的话需要在路由器上做端口转发,把9091映射成你想要端口</p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.26.02.png" alt="屏幕快照 2018-06-16 11.26.02"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下给移动硬盘分区]]></title>
+    <link href="http://blog.qudev.top/15291142264885.html"/>
+    <updated>2018-06-16T09:57:06+08:00</updated>
+    <id>http://blog.qudev.top/15291142264885.html</id>
+    <content type="html"><![CDATA[
+<p>最近申请到了一个PT账号,所以买了个树莓派准备把一块3T的闲置硬盘(当初准备放在PS4做外置硬盘的)挂在树莓派上做下载机.</p>
+
+<p>一开始用的NTFS格式,但是查了下发现Linux下挂在NTFS兼容性不是很好,而且资源占用比较多,所以准备重新格式化一下(下面截图是在虚拟机下演示操作的)</p>
+
+<h2 id="toc_0">查看磁盘信息</h2>
+
+<p>命令<code>lsblk</code>可以查看目前挂在的硬盘,<code>sdb</code>就是挂载的USB硬盘</p>
+
+<p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.12.06.png" alt="屏幕快照 2018-06-16 10.12.06"/></p>
+
+<h2 id="toc_1">分区</h2>
+
+<pre class="line-numbers"><code class="language-bash">sudo fdisk /dev/sdb
+</code></pre>
+
+<p>进入分区模式</p>
+
+<p>输入<code>m</code>来查看帮助信息</p>
+
+<p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.17.09.png" alt="屏幕快照 2018-06-16 10.17.09"/></p>
+
+<p><code>n</code>新建分区,因为我是只分一个区所以一路按回车默认就行了</p>
+
+<p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.19.42.png" alt="屏幕快照 2018-06-16 10.19.42"/></p>
+
+<p><code>w</code>保存并退出分区管理</p>
+
+<h2 id="toc_2">格式化硬盘</h2>
+
+<p>格式化硬盘,EXT3格式</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+</code></pre>
+
+<p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.23.32.png" alt="屏幕快照 2018-06-16 10.23.32"/></p>
+
+<h2 id="toc_3">挂载硬盘</h2>
+
+<pre class="line-numbers"><code class="language-bash">sudo mkdir /home/qu/usbdisk
+sudo mount /dev/sdb /home/qu/usbdisk
+</code></pre>
+
+<p>上面是临时挂载的移动硬盘,如果想自动挂载的话可以修改<code>/etc/fstab</code>文件</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo vim /etc/fstab
+</code></pre>
+
+<p>在最后插入一行</p>
+
+<p><code>/dev/sdb/ /home/qu/usbdisk ext3 default 0 0</code></p>
+
+<p>下回系统重启之后就会自动将/dev/sdb磁盘挂载到/home/qu/usbdisk目录下了,格式为EXT3</p>
+
+<p>第一个<code>0</code>:能否被dump备份命令作用:dump是一个用来作为备份的命令.通常这个参数的值为0或者1</p>
+
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>代表不要做dump备份</td>
+</tr>
+<tr>
+<td>1</td>
+<td>代表要每天进行dump的操作</td>
+</tr>
+<tr>
+<td>2</td>
+<td>代表不定日期的进行dump操作</td>
+</tr>
+</tbody>
+</table>
+
+<p>第二个<code>0</code>:是否检验扇区:开机的过程中,系统默认会以fsck检验我们系统是否为完整(clean).</p>
+
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>不要检验</td>
+</tr>
+<tr>
+<td>1</td>
+<td>最早检验(一般根目录会选择)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1级别检验完成之后进行检验</td>
+</tr>
+</tbody>
+</table>
+
+<p>我是默认都是0,不做备份不校验</p>
+
+<p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.30.14.png" alt="屏幕快照 2018-06-16 10.30.14"/></p>
+
+<h2 id="toc_4">参考</h2>
+
+<p><a href="https://blog.csdn.net/xyang81/article/details/51745683">Linux新增磁盘、分区、格式化和自动挂载</a></p>
+
+<p><a href="https://www.cnblogs.com/qiyebao/p/4484047.html">Linux命令-自动挂载文件/etc/fstab功能详解[转]</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sql Server 日期格式化]]></title>
+    <link href="http://blog.qudev.top/15282803325957.html"/>
+    <updated>2018-06-06T18:18:52+08:00</updated>
+    <id>http://blog.qudev.top/15282803325957.html</id>
+    <content type="html"><![CDATA[
+<p>Sql Server 中一个非常强大的日期格式化函数</p>
+
+<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 0): 05 16 2006 10:57AM 
+Select CONVERT(varchar(100), GETDATE(), 1): 05/16/06 
+Select CONVERT(varchar(100), GETDATE(), 2): 06.05.16 
+Select CONVERT(varchar(100), GETDATE(), 3): 16/05/06 
+Select CONVERT(varchar(100), GETDATE(), 4): 16.05.06 
+Select CONVERT(varchar(100), GETDATE(), 5): 16-05-06 
+Select CONVERT(varchar(100), GETDATE(), 6): 16 05 06 
+Select CONVERT(varchar(100), GETDATE(), 7): 05 16, 06 
+Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
+Select CONVERT(varchar(100), GETDATE(), 9): 05 16 2006 10:57:46:827AM 
+Select CONVERT(varchar(100), GETDATE(), 10): 05-16-06 
+Select CONVERT(varchar(100), GETDATE(), 11): 06/05/16 
+Select CONVERT(varchar(100), GETDATE(), 12): 060516 
+Select CONVERT(varchar(100), GETDATE(), 13): 16 05 2006 10:57:46:937 
+Select CONVERT(varchar(100), GETDATE(), 14): 10:57:46:967 
+Select CONVERT(varchar(100), GETDATE(), 20): 2006-05-16 10:57:47 
+Select CONVERT(varchar(100), GETDATE(), 21): 2006-05-16 10:57:47.157 
+Select CONVERT(varchar(100), GETDATE(), 22): 05/16/06 10:57:47 AM 
+Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16 
+Select CONVERT(varchar(100), GETDATE(), 24): 10:57:47 
+Select CONVERT(varchar(100), GETDATE(), 25): 2006-05-16 10:57:47.250 
+Select CONVERT(varchar(100), GETDATE(), 100): 05 16 2006 10:57AM 
+Select CONVERT(varchar(100), GETDATE(), 101): 05/16/2006 
+Select CONVERT(varchar(100), GETDATE(), 102): 2006.05.16 
+Select CONVERT(varchar(100), GETDATE(), 103): 16/05/2006 
+Select CONVERT(varchar(100), GETDATE(), 104): 16.05.2006 
+Select CONVERT(varchar(100), GETDATE(), 105): 16-05-2006 
+Select CONVERT(varchar(100), GETDATE(), 106): 16 05 2006 
+Select CONVERT(varchar(100), GETDATE(), 107): 05 16, 2006 
+Select CONVERT(varchar(100), GETDATE(), 108): 10:57:49 
+Select CONVERT(varchar(100), GETDATE(), 109): 05 16 2006 10:57:49:437AM 
+Select CONVERT(varchar(100), GETDATE(), 110): 05-16-2006 
+Select CONVERT(varchar(100), GETDATE(), 111): 2006/05/16 
+Select CONVERT(varchar(100), GETDATE(), 112): 20060516 
+Select CONVERT(varchar(100), GETDATE(), 113): 16 05 2006 10:57:49:513 
+Select CONVERT(varchar(100), GETDATE(), 114): 10:57:49:547 
+Select CONVERT(varchar(100), GETDATE(), 120): 2006-05-16 10:57:49 
+Select CONVERT(varchar(100), GETDATE(), 121): 2006-05-16 10:57:49.700 
+Select CONVERT(varchar(100), GETDATE(), 126): 2006-05-16T10:57:49.827 
+Select CONVERT(varchar(100), GETDATE(), 130): 18 ???? ?????? 1427 10:57:49:907AM 
+Select CONVERT(varchar(100), GETDATE(), 131): 18/04/1427 10:57:49:920AM
+</code></pre>
+
+<p>常用:</p>
+
+<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
+Select CONVERT(varchar(100), GETDATE(), 24): 10:57:47 
+Select CONVERT(varchar(100), GETDATE(), 108): 10:57:49 
+Select CONVERT(varchar(100), GETDATE(), 12): 060516 
+Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16
+</code></pre>
+
+<p>格式:<br/>
+<code>CONVERT(data_type,e­xpression[,style])</code><br/>
+说明:<br/>
+此样式一般在时间类型<code>(datetime,smalldatetime)</code>与字符串类型<code>(nchar,nvarchar,char,varchar)</code><br/>
+相互转换的时候才用到.<br/>
+例子:</p>
+
+<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(30),getdate(),101) now
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修复下载文件夹变英文]]></title>
+    <link href="http://blog.qudev.top/15276843925995.html"/>
+    <updated>2018-05-30T20:46:32+08:00</updated>
+    <id>http://blog.qudev.top/15276843925995.html</id>
+    <content type="html"><![CDATA[
+<p>下载文件夹变成了 Downloads，在终端中运行<code>touch ~/Downloads/.localized</code>，重启 Finder （按住 ⌥ 在 dock 的 Finder 上右键）修好了。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android手机连接电脑的时候提示adb server version (31) doesn't match this client (39)的解决方案]]></title>
+    <link href="http://blog.qudev.top/15273352175202.html"/>
+    <updated>2018-05-26T19:46:57+08:00</updated>
+    <id>http://blog.qudev.top/15273352175202.html</id>
+    <content type="html"><![CDATA[
+<p>在cmd中输入<code>db nodaemon server -a</code></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu双网卡配置]]></title>
+    <link href="http://blog.qudev.top/15247502619814.html"/>
+    <updated>2018-04-26T21:44:21+08:00</updated>
+    <id>http://blog.qudev.top/15247502619814.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">Ubuntu 17.10双网卡配置</h2>
+
+<p>Ubuntu网络配置多年来一直在用NetworkManager,ifupdown等工具. 17.10引入netplan作为在Ubuntu中配置接口的标准声明性YAML语法</p>
+
+<p>Ubuntu 17.10版本修改网络固定IP的方法跟其他版本不一样 不需要修改<code>/etc/network/interfaces</code>文件,而是通过在<code>/etc/netplan/</code>下创建一个自定义YAML配置文件来实现</p>
+
+<h3 id="toc_1">创建一个YAML文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+</code></pre>
+
+<p>以我的配置为例,我的第二个网卡名称是<code>enp0s8</code>,设置成固定IP方便宿主机SSH远程</p>
+
+<p>YAML内容:</p>
+
+<pre class="line-numbers"><code class="language-text"># This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s8:
+      dhcp4: no
+      addresses: [192.168.56.2/24]
+</code></pre>
+
+<p>确认配置并重启</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo netplan apply
+sudo init 6 
+</code></pre>
+
+<h2 id="toc_2">Ubuntu 17.10以下双网卡配置</h2>
+
+<h3 id="toc_3">修改Ubuntu的网络配置文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">sudo vim /etc/network/interfaces
+</code></pre>
+
+<p>配置如下</p>
+
+<pre class="line-numbers"><code class="language-bash"># The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+
+#the second eth1
+auto eth1
+iface eth1 inet static
+address 192.168.56.2
+netmask 255.255.255.0
+</code></pre>
+
+<ul>
+<li>eth0为NAT模式的网卡,eth1为Host-only的网卡</li>
+<li>主机和虚拟机通信用192.168.56.*这个网段</li>
+</ul>
+
+<p>重启虚拟机</p>
+
+<h2 id="toc_4">参考</h2>
+
+<p><a href="https://websiteforstudents.com/configuring-static-ips-ubuntu-17-10-servers/">CONFIGURING STATIC IP ADDRESSES ON UBUNTU 17.10 SERVERS</a></p>
+
+<p><a href="https://wiki.ubuntu.com/Netplan">NetPlan</a></p>
+
+<p><a href="http://www.linuxidc.com/Linux/2017-10/148112.htm">Ubuntu17.10新特性</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[macOS U盘安装盘制作]]></title>
+    <link href="http://blog.qudev.top/15247502067836.html"/>
+    <updated>2018-04-26T21:43:26+08:00</updated>
+    <id>http://blog.qudev.top/15247502067836.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li>将系统安装文件重命名为Install macOS.app</li>
+<li>将U盘格式化成OSX拓展格式并重命名为macOS</li>
+<li>制作macOS安装盘</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-bash">sudo /Applications/&#39;Install macOS High Sierra.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/&#39;macOS&#39; --applicationpath /Applications/&#39;Install macOS High Sierra.app&#39;
+</code></pre>
+
+<p>PS:</p>
+
+<p>如果出现权限不够</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo chmod +x /Applications/&#39;Install macOS.app&#39;/Contents/Resources/createinstallmedia
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS安装TCP-BBR]]></title>
+    <link href="http://blog.qudev.top/15247501426506.html"/>
+    <updated>2018-04-26T21:42:22+08:00</updated>
+    <id>http://blog.qudev.top/15247501426506.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">安装步骤</h2>
+
+<p>使用root用户登录,运行以下命令:</p>
+
+<pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; bash bbr.sh
+</code></pre>
+
+<p>安装完成后,脚本会提示需要重启 VPS,输入 y 并回车后重启</p>
+
+<h2 id="toc_1">验证BBR是否安装成功</h2>
+
+<p>重启完成后,进入 VPS,验证一下是否成功安装最新内核并开启 TCP BBR,输入以下命令:</p>
+
+<pre class="line-numbers"><code class="language-bash">uname -r
+# 查看内核版本,含有 4.9.0 就表示 OK 了
+# ————————————
+sysctl net.ipv4.tcp_available_congestion_control
+# 返回值一般为:
+# net.ipv4.tcp_available_congestion_control = bbr cubic reno
+# ————————————
+sysctl net.ipv4.tcp_congestion_control
+# 返回值一般为:
+# net.ipv4.tcp_congestion_control = bbr
+# ————————————
+sysctl net.core.default_qdisc
+# 返回值一般为:
+# net.core.default_qdisc = fq
+# ————————————
+lsmod | grep bbr
+# 返回值有 tcp_bbr 模块即说明bbr已启动
+</code></pre>
+
+<h2 id="toc_2">使用方法</h2>
+
+<pre class="line-numbers"><code class="language-bash"># 启动BBR
+bash bbr.sh start
+ 
+# 关闭BBR
+bash bbr.sh stop
+ 
+# 查看BBR状态
+bash bbr.sh status
+</code></pre>
+
+<p><code>注意：关闭BBR需要重启VPS所以脚本会提醒是否立即重启VPS</code></p>
+
+<h2 id="toc_3">升级BBR</h2>
+
+<pre class="line-numbers"><code class="language-bash">bash bbr.sh
+# 重新执行脚本会检测最新内核和当前内核对比版本
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS下部署SSR]]></title>
+    <link href="http://blog.qudev.top/15247483205460.html"/>
+    <updated>2018-04-26T21:12:00+08:00</updated>
+    <id>http://blog.qudev.top/15247483205460.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">SSR一键安装包</h2>
+
+<p>下载脚本</p>
+
+<pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+</code></pre>
+
+<p>安装完成后</p>
+
+<p><img src="media/15096861453670/14741174149723.jpg" alt="预览"/></p>
+
+<p>该脚本已经自动将 Shadowsocks 加入开机自启，安装完成 Shadowsocks 就已经启动了。</p>
+
+<h3 id="toc_1">Shadowsocks配置文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">/etc/shadowsocks.json
+</code></pre>
+
+<h3 id="toc_2">其他命令</h3>
+
+<ul>
+<li>卸载</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">./shadowsocksR.sh uninstall
+</code></pre>
+
+<ul>
+<li>启动</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks start
+</code></pre>
+
+<ul>
+<li>停止</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks stop
+</code></pre>
+
+<ul>
+<li>重启</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks restart
+</code></pre>
+
+<ul>
+<li>状态</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks status
+</code></pre>
+
+<h3 id="toc_3">为Shadowsocks添加多个端口和密码</h3>
+
+<p>如果你想将 Shadowsocks 账号出售给其他人,或者希望将账号共享给朋友,又不想和他使用同一个密码,那么你就需要给 Shadowsocks添加多个端口和密码,具体还是需要修改 Shadowsocks的配置文件:</p>
+
+<p>默认的单个端口的配置文件如下:</p>
+
+<pre class="line-numbers"><code class="language-javascript">{
+ &quot;server&quot;:&quot;0.0.0.0&quot;,
+ &quot;server_ipv6&quot;:&quot;::&quot;,
+ &quot;server_port&quot;:8001,
+ &quot;local_address&quot;:&quot;127.0.0.1&quot;,
+ &quot;local_port&quot;:1080,
+ &quot;password&quot;:&quot;123456&quot;,
+ &quot;timeout&quot;:120,
+ &quot;method&quot;:&quot;chacha20&quot;,
+ &quot;protocol&quot;:&quot;origin&quot;,
+ &quot;protocol_param&quot;:&quot;&quot;,
+ &quot;obfs&quot;:&quot;plain&quot;,
+ &quot;obfs_param&quot;:&quot;&quot;,
+ &quot;redirect&quot;:&quot;&quot;,
+ &quot;dns_ipv6&quot;:false,
+ &quot;fast_open&quot;:false,
+ &quot;workers&quot;:1
+}
+</code></pre>
+
+<p>你需要将其中的<code>server_port</code>和<code>password</code>删掉,并且添加<code>port_password</code>的字段:</p>
+
+<pre class="line-numbers"><code class="language-javascript">    &quot;port_password&quot;: {
+        &quot;8001&quot;: {
+            &quot;protocol&quot;: &quot;auth_sha1_v2_compatible&quot;,
+            &quot;password&quot;: &quot;12345&quot;,
+            &quot;obfs&quot;: &quot;tls1.2_ticket_auth_compatible&quot;,
+            &quot;obfs_param&quot;: &quot;&quot;
+        },
+        &quot;8002&quot;:&quot;password2&quot;,
+        &quot;8003&quot;:&quot;password3&quot;
+    },
+</code></pre>
+
+<p>修改好之后，重启 Shadowsocks</p>
+
+<p>Shadowsocks 算是安装好了，不过速度很不理想，我们可以使用 ServerSpeeder 对它进行加速。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[常用正则表达式]]></title>
+    <link href="http://blog.qudev.top/15247482751395.html"/>
+    <updated>2018-04-26T21:11:15+08:00</updated>
+    <id>http://blog.qudev.top/15247482751395.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">大于等于的数字</h3>
+
+<p><code>^[\d]+[\.]?[\d]+$|^[0-9]$</code></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git常用命令]]></title>
+    <link href="http://blog.qudev.top/15247482527226.html"/>
+    <updated>2018-04-26T21:10:52+08:00</updated>
+    <id>http://blog.qudev.top/15247482527226.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">配置</h2>
+
+<h3 id="toc_1">全局配置</h3>
+
+<pre class="line-numbers"><code class="language-bash">git config --global user.name &quot;Qu&quot;
+git config --global user.email &quot;EvanQu@outlook.com&quot;
+</code></pre>
+
+<h2 id="toc_2">基本</h2>
+
+<h3 id="toc_3">初始化Git仓库</h3>
+
+<pre class="line-numbers"><code class="language-bash">git init
+</code></pre>
+
+<h3 id="toc_4">添加文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">git add files
+git add . 
+</code></pre>
+
+<p>. 添加全部文件</p>
+
+<h3 id="toc_5">提交文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">git commit -m &quot;注释说明&quot;
+</code></pre>
+
+<h3 id="toc_6">查看Git当前状态</h3>
+
+<pre class="line-numbers"><code class="language-bash">git status 
+</code></pre>
+
+<h3 id="toc_7">查看文件修改内容</h3>
+
+<pre class="line-numbers"><code class="language-bash">git diff 
+</code></pre>
+
+<h3 id="toc_8">查看提交记录</h3>
+
+<pre class="line-numbers"><code class="language-bash">git log --pretty=oneline
+</code></pre>
+
+<p>--pretty=oneline简化信息</p>
+
+<h3 id="toc_9">返回某个版本</h3>
+
+<pre class="line-numbers"><code class="language-bash">git reset --hard HEAD^
+git reset __hard
+</code></pre>
+
+<p>HEAD<sup>上一个版本</sup> HEAD<sup><sup>上上一个版本</sup></sup></p>
+
+<h3 id="toc_10">查看操作命令记录</h3>
+
+<pre class="line-numbers"><code class="language-bash">git reflog
+</code></pre>
+
+<h3 id="toc_11">撤销工作区的修改</h3>
+
+<pre class="line-numbers"><code class="language-bash">git chekout --
+</code></pre>
+
+<h3 id="toc_12">删除文件</h3>
+
+<pre class="line-numbers"><code class="language-bash">git rm
+</code></pre>
+
+<h2 id="toc_13">远程</h2>
+
+<h3 id="toc_14">创建SSH Key</h3>
+
+<pre class="line-numbers"><code class="language-bash">ssh-keygen -t rsa -C &quot;EvanQu@outlook.com&quot;
+</code></pre>
+
+<h3 id="toc_15">查看远程库信息</h3>
+
+<pre class="line-numbers"><code class="language-bash">git remote -v
+</code></pre>
+
+<h3 id="toc_16">添加远程仓库</h3>
+
+<pre class="line-numbers"><code class="language-bash">git remote add origin
+git@github.com:happyququ/learngit.git
+</code></pre>
+
+<h3 id="toc_17">第一次推送</h3>
+
+<pre class="line-numbers"><code class="language-bash">git push -u origin master
+</code></pre>
+
+<h3 id="toc_18">推送到远程库</h3>
+
+<pre class="line-numbers"><code class="language-bash">git push
+</code></pre>
+
+<h3 id="toc_19">推送到远程库分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git push origin
+</code></pre>
+
+<h3 id="toc_20">服务器拉取</h3>
+
+<pre class="line-numbers"><code class="language-bash">git pull
+</code></pre>
+
+<h3 id="toc_21">克隆仓库</h3>
+
+<pre class="line-numbers"><code class="language-bash">git clone
+git@github.com:happyququ/learninggit.git
+</code></pre>
+
+<h3 id="toc_22">本地创建与远程库分支对应的分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git
+checkout -b origin/
+</code></pre>
+
+<h3 id="toc_23">本地分支与远程分支关联</h3>
+
+<pre class="line-numbers"><code class="language-bash">git branch --set-upstream origin/
+</code></pre>
+
+<h2 id="toc_24">分支</h2>
+
+<h3 id="toc_25">查看分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git branch
+</code></pre>
+
+<h3 id="toc_26">创建分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git branch
+</code></pre>
+
+<h3 id="toc_27">切换分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git checkout
+</code></pre>
+
+<h3 id="toc_28">创建并切换分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git checkout -b
+</code></pre>
+
+<h3 id="toc_29">合并某个分支到当前分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git merge
+</code></pre>
+
+<p>合并就看不出来曾经做过合并</p>
+
+<h3 id="toc_30">删除分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git branch -d
+</code></pre>
+
+<h3 id="toc_31">强行删除分支</h3>
+
+<pre class="line-numbers"><code class="language-bash">git branch -D
+</code></pre>
+
+<h3 id="toc_32">查看分支合并图</h3>
+
+<pre class="line-numbers"><code class="language-bash">git -log --graph
+</code></pre>
+
+<h3 id="toc_33">合并分支保留分支信息</h3>
+
+<pre class="line-numbers"><code class="language-bash">git merge --no-ff -m &quot;&quot;
+</code></pre>
+
+<p>合并后的历史有分支,能看出来曾经做过合并 ### 隐藏当前工作区</p>
+
+<pre class="line-numbers"><code class="language-bash">git stash
+</code></pre>
+
+<h3 id="toc_34">显示隐藏的工作区</h3>
+
+<pre class="line-numbers"><code class="language-bash">git stash list
+</code></pre>
+
+<h3 id="toc_35">恢复隐藏的工作区</h3>
+
+<pre class="line-numbers"><code class="language-bash">git stash pop
+</code></pre>
+
+<h2 id="toc_36">标签</h2>
+
+<h3 id="toc_37">新建标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">git tag
+</code></pre>
+
+<h3 id="toc_38">指定标签信息</h3>
+
+<pre class="line-numbers"><code class="language-bash">git tag -a -m &quot;&quot;
+</code></pre>
+
+<h3 id="toc_39">查看所有标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">git tag
+</code></pre>
+
+<h3 id="toc_40">推送一个本地标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">git push origin
+</code></pre>
+
+<h3 id="toc_41">推送全部标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">git push origin --tags
+</code></pre>
+
+<h3 id="toc_42">删除本地标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">git tag -d
+</code></pre>
+
+<h3 id="toc_43">删除远程标签</h3>
+
+<pre class="line-numbers"><code class="language-bash">push origin :refs/tags/
+</code></pre>
+
+<h3 id="toc_44">显示颜色</h3>
+
+<pre class="line-numbers"><code class="language-bash">git config --global color.ui true
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hexo安装和部署]]></title>
+    <link href="http://blog.qudev.top/15247480658840.html"/>
+    <updated>2018-04-26T21:07:45+08:00</updated>
+    <id>http://blog.qudev.top/15247480658840.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>基础安装<br/>
+NodeJs安装</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">sudo apt install NodeJs
+</code></pre>
+
+<ul>
+<li>Hexo安装</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">sudo npm install hexo-cli -g
+</code></pre>
+
+<p>如果出现<code>sh: 1: cannot create highlight_alias.json: Permission denied</code>错误,尝试执行<code>sudo npm config set unsafe-perm true</code>，依然不行按照官方解决方案尝试<a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">fixing-npm-permissions</a></p>
+
+<ul>
+<li>初始化Hexo</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">hexo init blog
+sudo npm install
+</code></pre>
+
+<ul>
+<li>安装Git发布插件</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-bash">sudo npm install hexo-deployer-git --save
+</code></pre>
+
+<ul>
+<li>在Github或者码云上自己名字的项目,比如我的项目地址:<code>git@github.com:HappyQuQu/happyququ.github.io.git</code></li>
+<li>将自己电脑上生成的SSH pubkey保存在GitHub上</li>
+<li>在Hexo的_config.xml文件里填上自己的项目地址</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">deploy:
+  type: git
+  repo: git@github.com:HappyQuQu/happyququ.github.io.git
+</code></pre>
+
+<ul>
+<li><p>在项目的根目录，新建名为CNAME的文件，内容为：你的域名，例如我的就是:<code>qudev.top</code></p></li>
+<li><p>再到把你的域名指向你的<code>happyququ.github.io</code>，几分钟过后，就可以看到成功的诞生了。</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
