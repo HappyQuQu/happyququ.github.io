@@ -68,11 +68,18 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+<<<<<<< HEAD
         
         <li><a target="self" href="index.html">Home</a></li>
         
         <li><a target="_self" href="archives.html">Archives</a></li>
         
+=======
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 
     <li><label>Categories</label></li>
 
@@ -129,13 +136,21 @@
 
 <p>一般默认的源里面就有所以直接下载</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo apt-get update
+=======
+<pre><code class="language-bash">sudo apt-get update
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo apt-get install -y transmission-daemon
 </code></pre>
 
 <h2 id="toc_1">修改默认配置文件</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+=======
+<pre><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>配置比较多但是其实只要配置几个关键的点就行了</p>
@@ -144,17 +159,29 @@ sudo apt-get install -y transmission-daemon
 
 <p>我的下载目录是挂载的一块3T的硬盘</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+=======
+<pre><code class="language-json">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h4 id="toc_3">未完成目录</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+=======
+<pre><code class="language-json">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h4 id="toc_4">远程控制管理</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+=======
+<pre><code class="language-json">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 &quot;rpc-whitelist-enabled&quot;: false,
 </code></pre>
 
@@ -163,7 +190,11 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_5">远程用户名密码</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
+=======
+<pre><code class="language-json">&quot;rpc-username&quot;: &quot;transmission&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 &quot;rpc-password&quot;: &quot;123456&quot;,
 </code></pre>
 
@@ -171,7 +202,11 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_6">重载配置和服务</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
+=======
+<pre><code class="language-bash">sudo service transmission-daemon reload
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo service transmission-daemon restart
 </code></pre>
 

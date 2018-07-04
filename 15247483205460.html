@@ -68,11 +68,18 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+<<<<<<< HEAD
         
         <li><a target="self" href="index.html">Home</a></li>
         
         <li><a target="_self" href="archives.html">Archives</a></li>
         
+=======
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 
     <li><label>Categories</label></li>
 
@@ -142,7 +149,11 @@
 
 <p>下载脚本</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+=======
+<pre><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>安装完成后</p>
@@ -153,7 +164,11 @@
 
 <h3 id="toc_1">Shadowsocks配置文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/shadowsocks.json
+=======
+<pre><code class="language-bash">/etc/shadowsocks.json
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_2">其他命令</h3>
@@ -162,35 +177,55 @@
 <li>卸载</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">./shadowsocksR.sh uninstall
+=======
+<pre><code class="language-bash">./shadowsocksR.sh uninstall
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>启动</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks start
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks start
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>停止</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks stop
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks stop
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>重启</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks restart
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks restart
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>状态</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks status
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks status
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_3">为Shadowsocks添加多个端口和密码</h3>
@@ -199,7 +234,11 @@
 
 <p>默认的单个端口的配置文件如下:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">{
+=======
+<pre><code class="language-json">{
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
  &quot;server&quot;:&quot;0.0.0.0&quot;,
  &quot;server_ipv6&quot;:&quot;::&quot;,
  &quot;server_port&quot;:8001,
@@ -221,7 +260,11 @@
 
 <p>你需要将其中的<code>server_port</code>和<code>password</code>删掉,并且添加<code>port_password</code>的字段:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">    &quot;port_password&quot;: {
+=======
+<pre><code class="language-json">    &quot;port_password&quot;: {
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
         &quot;8001&quot;: {
             &quot;protocol&quot;: &quot;auth_sha1_v2_compatible&quot;,
             &quot;password&quot;: &quot;12345&quot;,

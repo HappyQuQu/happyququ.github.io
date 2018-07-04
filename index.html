@@ -68,11 +68,18 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+<<<<<<< HEAD
         
         <li><a target="self" href="index.html">Home</a></li>
         
         <li><a target="_self" href="archives.html">Archives</a></li>
         
+=======
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 
     <li><label>Categories</label></li>
 
@@ -129,13 +136,21 @@
 
 <p>一般默认的源里面就有所以直接下载</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo apt-get update
+=======
+<pre><code class="language-bash">sudo apt-get update
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo apt-get install -y transmission-daemon
 </code></pre>
 
 <h2 id="toc_1">修改默认配置文件</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+=======
+<pre><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>配置比较多但是其实只要配置几个关键的点就行了</p>
@@ -144,17 +159,29 @@ sudo apt-get install -y transmission-daemon
 
 <p>我的下载目录是挂载的一块3T的硬盘</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+=======
+<pre><code class="language-json">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h4 id="toc_3">未完成目录</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+=======
+<pre><code class="language-json">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h4 id="toc_4">远程控制管理</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+=======
+<pre><code class="language-json">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 &quot;rpc-whitelist-enabled&quot;: false,
 </code></pre>
 
@@ -163,7 +190,11 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_5">远程用户名密码</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
+=======
+<pre><code class="language-json">&quot;rpc-username&quot;: &quot;transmission&quot;,
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 &quot;rpc-password&quot;: &quot;123456&quot;,
 </code></pre>
 
@@ -171,7 +202,11 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_6">重载配置和服务</h4>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
+=======
+<pre><code class="language-bash">sudo service transmission-daemon reload
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo service transmission-daemon restart
 </code></pre>
 
@@ -252,7 +287,11 @@ sudo service transmission-daemon restart
 
 <h2 id="toc_1">分区</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo fdisk /dev/sdb
+=======
+<pre><code class="language-bash">sudo fdisk /dev/sdb
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>进入分区模式</p>
@@ -271,20 +310,32 @@ sudo service transmission-daemon restart
 
 <p>格式化硬盘,EXT3格式</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+=======
+<pre><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.23.32.png" alt="屏幕快照 2018-06-16 10.23.32"/></p>
 
 <h2 id="toc_3">挂载硬盘</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo mkdir /home/qu/usbdisk
+=======
+<pre><code class="language-bash">sudo mkdir /home/qu/usbdisk
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo mount /dev/sdb /home/qu/usbdisk
 </code></pre>
 
 <p>上面是临时挂载的移动硬盘,如果想自动挂载的话可以修改<code>/etc/fstab</code>文件</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/fstab
+=======
+<pre><code class="language-bash">sudo vim /etc/fstab
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>在最后插入一行</p>
@@ -390,7 +441,11 @@ sudo mount /dev/sdb /home/qu/usbdisk
                         
                         	<p>Sql Server 中一个非常强大的日期格式化函数</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 0): 05 16 2006 10:57AM 
+=======
+<pre><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 0): 05 16 2006 10:57AM 
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 Select CONVERT(varchar(100), GETDATE(), 1): 05/16/06 
 Select CONVERT(varchar(100), GETDATE(), 2): 06.05.16 
 Select CONVERT(varchar(100), GETDATE(), 3): 16/05/06 
@@ -435,7 +490,11 @@ Select CONVERT(varchar(100), GETDATE(), 131): 18/04/1427 10:57:49:920AM
 
 <p>常用:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
+=======
+<pre><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 Select CONVERT(varchar(100), GETDATE(), 24): 10:57:47 
 Select CONVERT(varchar(100), GETDATE(), 108): 10:57:49 
 Select CONVERT(varchar(100), GETDATE(), 12): 060516 
@@ -449,7 +508,11 @@ Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16
 相互转换的时候才用到.<br/>
 例子:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(30),getdate(),101) now
+=======
+<pre><code class="language-sql">Select CONVERT(varchar(30),getdate(),101) now
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
                         
@@ -563,14 +626,22 @@ Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16
 
 <h3 id="toc_1">创建一个YAML文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+=======
+<pre><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>以我的配置为例,我的第二个网卡名称是<code>enp0s8</code>,设置成固定IP方便宿主机SSH远程</p>
 
 <p>YAML内容:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-text"># This file describes the network interfaces available on your system
+=======
+<pre><code># This file describes the network interfaces available on your system
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 # For more information, see netplan(5).
 network:
   version: 2
@@ -583,7 +654,11 @@ network:
 
 <p>确认配置并重启</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo netplan apply
+=======
+<pre><code class="language-bash">sudo netplan apply
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo init 6 
 </code></pre>
 
@@ -591,12 +666,20 @@ sudo init 6
 
 <h3 id="toc_3">修改Ubuntu的网络配置文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/network/interfaces
+=======
+<pre><code class="language-bash">sudo vim /etc/network/interfaces
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>配置如下</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash"># The loopback network interface
+=======
+<pre><code class="language-bash"># The loopback network interface
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 auto lo
 iface lo inet loopback
 
@@ -665,14 +748,22 @@ netmask 255.255.255.0
 <li>制作macOS安装盘</li>
 </ol>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo /Applications/&#39;Install macOS High Sierra.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/&#39;macOS&#39; --applicationpath /Applications/&#39;Install macOS High Sierra.app&#39;
+=======
+<pre><code class="language-bash">sudo /Applications/&#39;Install macOS High Sierra.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/&#39;macOS&#39; --applicationpath /Applications/&#39;Install macOS High Sierra.app&#39;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>PS:</p>
 
 <p>如果出现权限不够</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo chmod +x /Applications/&#39;Install macOS.app&#39;/Contents/Resources/createinstallmedia
+=======
+<pre><code class="language-bash">sudo chmod +x /Applications/&#39;Install macOS.app&#39;/Contents/Resources/createinstallmedia
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
                         
@@ -712,7 +803,11 @@ netmask 255.255.255.0
 
 <p>使用root用户登录,运行以下命令:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; bash bbr.sh
+=======
+<pre><code class="language-bash">wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; bash bbr.sh
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>安装完成后,脚本会提示需要重启 VPS,输入 y 并回车后重启</p>
@@ -721,7 +816,11 @@ netmask 255.255.255.0
 
 <p>重启完成后,进入 VPS,验证一下是否成功安装最新内核并开启 TCP BBR,输入以下命令:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">uname -r
+=======
+<pre><code class="language-bash">uname -r
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 # 查看内核版本,含有 4.9.0 就表示 OK 了
 # ————————————
 sysctl net.ipv4.tcp_available_congestion_control
@@ -742,7 +841,11 @@ lsmod | grep bbr
 
 <h2 id="toc_2">使用方法</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash"># 启动BBR
+=======
+<pre><code class="language-bash"># 启动BBR
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 bash bbr.sh start
  
 # 关闭BBR
@@ -756,7 +859,11 @@ bash bbr.sh status
 
 <h2 id="toc_3">升级BBR</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">bash bbr.sh
+=======
+<pre><code class="language-bash">bash bbr.sh
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 # 重新执行脚本会检测最新内核和当前内核对比版本
 </code></pre>
 
@@ -797,7 +904,11 @@ bash bbr.sh status
 
 <p>下载脚本</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+=======
+<pre><code class="language-bash">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/shadowsocks_install/master/shadowsocksR.sh &amp;&amp; bash shadowsocksR.sh
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>安装完成后</p>
@@ -808,7 +919,11 @@ bash bbr.sh status
 
 <h3 id="toc_1">Shadowsocks配置文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/shadowsocks.json
+=======
+<pre><code class="language-bash">/etc/shadowsocks.json
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_2">其他命令</h3>
@@ -817,35 +932,55 @@ bash bbr.sh status
 <li>卸载</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">./shadowsocksR.sh uninstall
+=======
+<pre><code class="language-bash">./shadowsocksR.sh uninstall
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>启动</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks start
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks start
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>停止</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks stop
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks stop
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>重启</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks restart
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks restart
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>状态</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">/etc/init.d/shadowsocks status
+=======
+<pre><code class="language-bash">/etc/init.d/shadowsocks status
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_3">为Shadowsocks添加多个端口和密码</h3>
@@ -854,7 +989,11 @@ bash bbr.sh status
 
 <p>默认的单个端口的配置文件如下:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">{
+=======
+<pre><code class="language-json">{
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
  &quot;server&quot;:&quot;0.0.0.0&quot;,
  &quot;server_ipv6&quot;:&quot;::&quot;,
  &quot;server_port&quot;:8001,
@@ -876,7 +1015,11 @@ bash bbr.sh status
 
 <p>你需要将其中的<code>server_port</code>和<code>password</code>删掉,并且添加<code>port_password</code>的字段:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-javascript">    &quot;port_password&quot;: {
+=======
+<pre><code class="language-json">    &quot;port_password&quot;: {
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
         &quot;8001&quot;: {
             &quot;protocol&quot;: &quot;auth_sha1_v2_compatible&quot;,
             &quot;password&quot;: &quot;12345&quot;,
@@ -966,7 +1109,11 @@ bash bbr.sh status
 
 <h3 id="toc_1">全局配置</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git config --global user.name &quot;Qu&quot;
+=======
+<pre><code class="language-bash">git config --global user.name &quot;Qu&quot;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 git config --global user.email &quot;EvanQu@outlook.com&quot;
 </code></pre>
 
@@ -974,12 +1121,20 @@ git config --global user.email &quot;EvanQu@outlook.com&quot;
 
 <h3 id="toc_3">初始化Git仓库</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git init
+=======
+<pre><code class="language-bash">git init
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_4">添加文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git add files
+=======
+<pre><code class="language-bash">git add files
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 git add . 
 </code></pre>
 
@@ -987,29 +1142,49 @@ git add .
 
 <h3 id="toc_5">提交文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git commit -m &quot;注释说明&quot;
+=======
+<pre><code class="language-bash">git commit -m &quot;注释说明&quot;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_6">查看Git当前状态</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git status 
+=======
+<pre><code class="language-bash">git status 
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_7">查看文件修改内容</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git diff 
+=======
+<pre><code class="language-bash">git diff 
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_8">查看提交记录</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git log --pretty=oneline
+=======
+<pre><code class="language-bash">git log --pretty=oneline
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>--pretty=oneline简化信息</p>
 
 <h3 id="toc_9">返回某个版本</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git reset --hard HEAD^
+=======
+<pre><code class="language-bash">git reset --hard HEAD^
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 git reset __hard
 </code></pre>
 
@@ -1017,178 +1192,310 @@ git reset __hard
 
 <h3 id="toc_10">查看操作命令记录</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git reflog
+=======
+<pre><code class="language-bash">git reflog
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_11">撤销工作区的修改</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git chekout --
+=======
+<pre><code class="language-bash">git chekout --
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_12">删除文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git rm
+=======
+<pre><code class="language-bash">git rm
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h2 id="toc_13">远程</h2>
 
 <h3 id="toc_14">创建SSH Key</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">ssh-keygen -t rsa -C &quot;EvanQu@outlook.com&quot;
+=======
+<pre><code class="language-bash">ssh-keygen -t rsa -C &quot;EvanQu@outlook.com&quot;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_15">查看远程库信息</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git remote -v
+=======
+<pre><code class="language-bash">git remote -v
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_16">添加远程仓库</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git remote add origin
+=======
+<pre><code class="language-bash">git remote add origin
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 git@github.com:happyququ/learngit.git
 </code></pre>
 
 <h3 id="toc_17">第一次推送</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git push -u origin master
+=======
+<pre><code class="language-bash">git push -u origin master
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_18">推送到远程库</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git push
+=======
+<pre><code class="language-bash">git push
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_19">推送到远程库分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git push origin
+=======
+<pre><code class="language-bash">git push origin
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_20">服务器拉取</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git pull
+=======
+<pre><code class="language-bash">git pull
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_21">克隆仓库</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git clone
+=======
+<pre><code class="language-bash">git clone
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 git@github.com:happyququ/learninggit.git
 </code></pre>
 
 <h3 id="toc_22">本地创建与远程库分支对应的分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git
+=======
+<pre><code class="language-bash">git
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 checkout -b origin/
 </code></pre>
 
 <h3 id="toc_23">本地分支与远程分支关联</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git branch --set-upstream origin/
+=======
+<pre><code class="language-bash">git branch --set-upstream origin/
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h2 id="toc_24">分支</h2>
 
 <h3 id="toc_25">查看分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git branch
+=======
+<pre><code class="language-bash">git branch
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_26">创建分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git branch
+=======
+<pre><code class="language-bash">git branch
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_27">切换分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git checkout
+=======
+<pre><code class="language-bash">git checkout
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_28">创建并切换分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git checkout -b
+=======
+<pre><code class="language-bash">git checkout -b
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_29">合并某个分支到当前分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git merge
+=======
+<pre><code class="language-bash">git merge
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>合并就看不出来曾经做过合并</p>
 
 <h3 id="toc_30">删除分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git branch -d
+=======
+<pre><code class="language-bash">git branch -d
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_31">强行删除分支</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git branch -D
+=======
+<pre><code class="language-bash">git branch -D
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_32">查看分支合并图</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git -log --graph
+=======
+<pre><code class="language-bash">git -log --graph
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_33">合并分支保留分支信息</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git merge --no-ff -m &quot;&quot;
+=======
+<pre><code class="language-bash">git merge --no-ff -m &quot;&quot;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>合并后的历史有分支,能看出来曾经做过合并 ### 隐藏当前工作区</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git stash
+=======
+<pre><code class="language-bash">git stash
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_34">显示隐藏的工作区</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git stash list
+=======
+<pre><code class="language-bash">git stash list
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_35">恢复隐藏的工作区</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git stash pop
+=======
+<pre><code class="language-bash">git stash pop
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h2 id="toc_36">标签</h2>
 
 <h3 id="toc_37">新建标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git tag
+=======
+<pre><code class="language-bash">git tag
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_38">指定标签信息</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git tag -a -m &quot;&quot;
+=======
+<pre><code class="language-bash">git tag -a -m &quot;&quot;
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_39">查看所有标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git tag
+=======
+<pre><code class="language-bash">git tag
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_40">推送一个本地标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git push origin
+=======
+<pre><code class="language-bash">git push origin
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_41">推送全部标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git push origin --tags
+=======
+<pre><code class="language-bash">git push origin --tags
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_42">删除本地标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git tag -d
+=======
+<pre><code class="language-bash">git tag -d
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_43">删除远程标签</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">push origin :refs/tags/
+=======
+<pre><code class="language-bash">push origin :refs/tags/
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <h3 id="toc_44">显示颜色</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">git config --global color.ui true
+=======
+<pre><code class="language-bash">git config --global color.ui true
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
                         
@@ -1225,18 +1532,30 @@ checkout -b origin/
                       <div class="a-content-text">
                         
                         	<ul>
+<<<<<<< HEAD
 <li>基础安装<br/>
 NodeJs安装</li>
 </ul>
 
 <pre class="line-numbers"><code class="language-bash">sudo apt install NodeJs
+=======
+<li>基础安装
+NodeJs安装</li>
+</ul>
+
+<pre><code class="language-bash">sudo apt install NodeJs
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
 <li>Hexo安装</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo npm install hexo-cli -g
+=======
+<pre><code class="language-bash">sudo npm install hexo-cli -g
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>如果出现<code>sh: 1: cannot create highlight_alias.json: Permission denied</code>错误,尝试执行<code>sudo npm config set unsafe-perm true</code>，依然不行按照官方解决方案尝试<a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">fixing-npm-permissions</a></p>
@@ -1245,7 +1564,11 @@ NodeJs安装</li>
 <li>初始化Hexo</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">hexo init blog
+=======
+<pre><code class="language-bash">hexo init blog
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo npm install
 </code></pre>
 
@@ -1253,7 +1576,11 @@ sudo npm install
 <li>安装Git发布插件</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo npm install hexo-deployer-git --save
+=======
+<pre><code class="language-bash">sudo npm install hexo-deployer-git --save
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <ul>
@@ -1262,7 +1589,11 @@ sudo npm install
 <li>在Hexo的_config.xml文件里填上自己的项目地址</li>
 </ul>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-text">deploy:
+=======
+<pre><code>deploy:
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
   type: git
   repo: git@github.com:HappyQuQu/happyququ.github.io.git
 </code></pre>

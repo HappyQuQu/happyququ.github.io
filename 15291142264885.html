@@ -68,11 +68,18 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+<<<<<<< HEAD
         
         <li><a target="self" href="index.html">Home</a></li>
         
         <li><a target="_self" href="archives.html">Archives</a></li>
         
+=======
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 
     <li><label>Categories</label></li>
 
@@ -150,7 +157,11 @@
 
 <h2 id="toc_1">分区</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo fdisk /dev/sdb
+=======
+<pre><code class="language-bash">sudo fdisk /dev/sdb
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>进入分区模式</p>
@@ -169,20 +180,32 @@
 
 <p>格式化硬盘,EXT3格式</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+=======
+<pre><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.23.32.png" alt="屏幕快照 2018-06-16 10.23.32"/></p>
 
 <h2 id="toc_3">挂载硬盘</h2>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo mkdir /home/qu/usbdisk
+=======
+<pre><code class="language-bash">sudo mkdir /home/qu/usbdisk
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo mount /dev/sdb /home/qu/usbdisk
 </code></pre>
 
 <p>上面是临时挂载的移动硬盘,如果想自动挂载的话可以修改<code>/etc/fstab</code>文件</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/fstab
+=======
+<pre><code class="language-bash">sudo vim /etc/fstab
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>在最后插入一行</p>

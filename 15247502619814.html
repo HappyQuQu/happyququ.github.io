@@ -68,11 +68,18 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+<<<<<<< HEAD
         
         <li><a target="self" href="index.html">Home</a></li>
         
         <li><a target="_self" href="archives.html">Archives</a></li>
         
+=======
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 
     <li><label>Categories</label></li>
 
@@ -146,14 +153,22 @@
 
 <h3 id="toc_1">创建一个YAML文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+=======
+<pre><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>以我的配置为例,我的第二个网卡名称是<code>enp0s8</code>,设置成固定IP方便宿主机SSH远程</p>
 
 <p>YAML内容:</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-text"># This file describes the network interfaces available on your system
+=======
+<pre><code># This file describes the network interfaces available on your system
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 # For more information, see netplan(5).
 network:
   version: 2
@@ -166,7 +181,11 @@ network:
 
 <p>确认配置并重启</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo netplan apply
+=======
+<pre><code class="language-bash">sudo netplan apply
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 sudo init 6 
 </code></pre>
 
@@ -174,12 +193,20 @@ sudo init 6
 
 <h3 id="toc_3">修改Ubuntu的网络配置文件</h3>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash">sudo vim /etc/network/interfaces
+=======
+<pre><code class="language-bash">sudo vim /etc/network/interfaces
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 </code></pre>
 
 <p>配置如下</p>
 
+<<<<<<< HEAD
 <pre class="line-numbers"><code class="language-bash"># The loopback network interface
+=======
+<pre><code class="language-bash"># The loopback network interface
+>>>>>>> 6d1523da9d5381ab1534772a247c8b6433247ff3
 auto lo
 iface lo inet loopback
 
