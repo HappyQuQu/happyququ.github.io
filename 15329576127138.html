@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Sql Server 日期格式化 - Qu Blog
+  Sql Server大文件处理 - Qu Blog
   
   </title>
   
@@ -116,10 +116,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Sql Server 日期格式化</h1>
+          <h1>Sql Server大文件处理</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/6/6</span>
+          <span class="date">2018/7/30</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -128,7 +128,7 @@
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15282803325957.html#disqus_thread">comments</a>
+              <a href="http://blog.qudev.top/15329576127138.html#disqus_thread">comments</a>
             
 
             
@@ -138,69 +138,16 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Sql Server 中一个非常强大的日期格式化函数</p>
-
-<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 0): 05 16 2006 10:57AM 
-Select CONVERT(varchar(100), GETDATE(), 1): 05/16/06 
-Select CONVERT(varchar(100), GETDATE(), 2): 06.05.16 
-Select CONVERT(varchar(100), GETDATE(), 3): 16/05/06 
-Select CONVERT(varchar(100), GETDATE(), 4): 16.05.06 
-Select CONVERT(varchar(100), GETDATE(), 5): 16-05-06 
-Select CONVERT(varchar(100), GETDATE(), 6): 16 05 06 
-Select CONVERT(varchar(100), GETDATE(), 7): 05 16, 06 
-Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
-Select CONVERT(varchar(100), GETDATE(), 9): 05 16 2006 10:57:46:827AM 
-Select CONVERT(varchar(100), GETDATE(), 10): 05-16-06 
-Select CONVERT(varchar(100), GETDATE(), 11): 06/05/16 
-Select CONVERT(varchar(100), GETDATE(), 12): 060516 
-Select CONVERT(varchar(100), GETDATE(), 13): 16 05 2006 10:57:46:937 
-Select CONVERT(varchar(100), GETDATE(), 14): 10:57:46:967 
-Select CONVERT(varchar(100), GETDATE(), 20): 2006-05-16 10:57:47 
-Select CONVERT(varchar(100), GETDATE(), 21): 2006-05-16 10:57:47.157 
-Select CONVERT(varchar(100), GETDATE(), 22): 05/16/06 10:57:47 AM 
-Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16 
-Select CONVERT(varchar(100), GETDATE(), 24): 10:57:47 
-Select CONVERT(varchar(100), GETDATE(), 25): 2006-05-16 10:57:47.250 
-Select CONVERT(varchar(100), GETDATE(), 100): 05 16 2006 10:57AM 
-Select CONVERT(varchar(100), GETDATE(), 101): 05/16/2006 
-Select CONVERT(varchar(100), GETDATE(), 102): 2006.05.16 
-Select CONVERT(varchar(100), GETDATE(), 103): 16/05/2006 
-Select CONVERT(varchar(100), GETDATE(), 104): 16.05.2006 
-Select CONVERT(varchar(100), GETDATE(), 105): 16-05-2006 
-Select CONVERT(varchar(100), GETDATE(), 106): 16 05 2006 
-Select CONVERT(varchar(100), GETDATE(), 107): 05 16, 2006 
-Select CONVERT(varchar(100), GETDATE(), 108): 10:57:49 
-Select CONVERT(varchar(100), GETDATE(), 109): 05 16 2006 10:57:49:437AM 
-Select CONVERT(varchar(100), GETDATE(), 110): 05-16-2006 
-Select CONVERT(varchar(100), GETDATE(), 111): 2006/05/16 
-Select CONVERT(varchar(100), GETDATE(), 112): 20060516 
-Select CONVERT(varchar(100), GETDATE(), 113): 16 05 2006 10:57:49:513 
-Select CONVERT(varchar(100), GETDATE(), 114): 10:57:49:547 
-Select CONVERT(varchar(100), GETDATE(), 120): 2006-05-16 10:57:49 
-Select CONVERT(varchar(100), GETDATE(), 121): 2006-05-16 10:57:49.700 
-Select CONVERT(varchar(100), GETDATE(), 126): 2006-05-16T10:57:49.827 
-Select CONVERT(varchar(100), GETDATE(), 130): 18 ???? ?????? 1427 10:57:49:907AM 
-Select CONVERT(varchar(100), GETDATE(), 131): 18/04/1427 10:57:49:920AM
+      <pre class="line-numbers"><code class="language-bash">osql -S &#39;192.168.100.106\SQL2012&#39; -d TESTDB  -U TESTUSER -P TESTPASSWD -i C:\dbo.HEAD.Table.sql
 </code></pre>
 
-<p>常用:</p>
-
-<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(100), GETDATE(), 8): 10:57:46 
-Select CONVERT(varchar(100), GETDATE(), 24): 10:57:47 
-Select CONVERT(varchar(100), GETDATE(), 108): 10:57:49 
-Select CONVERT(varchar(100), GETDATE(), 12): 060516 
-Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16
-</code></pre>
-
-<p>格式:<br/>
-<code>CONVERT(data_type,e­xpression[,style])</code><br/>
-说明:<br/>
-此样式一般在时间类型<code>(datetime,smalldatetime)</code>与字符串类型<code>(nchar,nvarchar,char,varchar)</code><br/>
-相互转换的时候才用到.<br/>
-例子:</p>
-
-<pre class="line-numbers"><code class="language-sql">Select CONVERT(varchar(30),getdate(),101) now
-</code></pre>
+<ul>
+<li><code>-S</code>服务器地址</li>
+<li><code>-d</code>数据库名称</li>
+<li><code>-U</code>用户名</li>
+<li><code>-P</code>密码</li>
+<li><code>-i</code>文件路径</li>
+</ul>
 
 
     
@@ -211,16 +158,13 @@ Select CONVERT(varchar(100), GETDATE(), 23): 2006-05-16
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15291142264885.html" 
-          title="Previous Post: Linux下给移动硬盘分区">&laquo; Linux下给移动硬盘分区</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15276843925995.html" 
-          title="Next Post: 修复下载文件夹变英文">修复下载文件夹变英文 &raquo;</a>
+          <a  href="15291175282135.html" 
+          title="Next Post: 树莓派下搭建PT/BT下载器">树莓派下搭建PT/BT下载器 &raquo;</a>
       
       </p>
         </div>

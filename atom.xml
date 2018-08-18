@@ -4,13 +4,33 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-  <updated>2018-07-04T21:15:33+08:00</updated>
+  <updated>2018-08-18T17:00:40+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Sql Server大文件处理]]></title>
+    <link href="http://blog.qudev.top/15329576127138.html"/>
+    <updated>2018-07-30T21:33:32+08:00</updated>
+    <id>http://blog.qudev.top/15329576127138.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-bash">osql -S &#39;192.168.100.106\SQL2012&#39; -d TESTDB  -U TESTUSER -P TESTPASSWD -i C:\dbo.HEAD.Table.sql
+</code></pre>
+
+<ul>
+<li><code>-S</code>服务器地址</li>
+<li><code>-d</code>数据库名称</li>
+<li><code>-U</code>用户名</li>
+<li><code>-P</code>密码</li>
+<li><code>-i</code>文件路径</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派下搭建PT/BT下载器]]></title>
@@ -30,7 +50,7 @@ sudo apt-get install -y transmission-daemon
 
 <h2 id="toc_1">修改默认配置文件</h2>
 
-<pre class="line-numbers"><code class="language-bash">sudo /etc/transmission-daemon/settings.json
+<pre class="line-numbers"><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
 </code></pre>
 
 <p>配置比较多但是其实只要配置几个关键的点就行了</p>
