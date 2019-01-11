@@ -4,11 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-<<<<<<< HEAD
-  <updated>2019-01-11T14:27:21+08:00</updated>
-=======
-  <updated>2019-01-11T14:08:29+08:00</updated>
->>>>>>> cd150aac0cf072a3ab1d6d287666422d78400c18
+  <updated>2019-01-11T14:33:38+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -871,16 +867,11 @@ checkout -b origin/
   </entry>
   
   <entry>
-<<<<<<< HEAD
     <title type="html"><![CDATA[Hexo 安装和部署]]></title>
-=======
-    <title type="html"><![CDATA[Hexo安装和部署]]></title>
->>>>>>> cd150aac0cf072a3ab1d6d287666422d78400c18
     <link href="http://blog.qudev.top/15247480658840.html"/>
     <updated>2018-04-26T21:07:45+08:00</updated>
     <id>http://blog.qudev.top/15247480658840.html</id>
     <content type="html"><![CDATA[
-<<<<<<< HEAD
 <h3 id="toc_0">基础安装</h3>
 
 <p>NodeJs 安装</p>
@@ -910,44 +901,6 @@ sudo npm install
 <li>在Github或者码云上自己名字的项目,比如我的项目地址: <code>git@github.com:HappyQuQu/happyququ.github.io.git</code></li>
 <li>将自己电脑上生成的 SSH pubkey 保存在 GitHub 上</li>
 <li>在 Hexo 的 _config.xml 文件里填上自己的项目地址</li>
-=======
-<ul>
-<li>基础安装<br/>
-NodeJs安装</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-bash">sudo apt install NodeJs
-</code></pre>
-
-<ul>
-<li>Hexo安装</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-bash">sudo npm install hexo-cli -g
-</code></pre>
-
-<p>如果出现<code>sh: 1: cannot create highlight_alias.json: Permission denied</code>错误,尝试执行<code>sudo npm config set unsafe-perm true</code>，依然不行按照官方解决方案尝试<a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">fixing-npm-permissions</a></p>
-
-<ul>
-<li>初始化Hexo</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-bash">hexo init blog
-sudo npm install
-</code></pre>
-
-<ul>
-<li>安装Git发布插件</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-bash">sudo npm install hexo-deployer-git --save
-</code></pre>
-
-<ul>
-<li>在Github或者码云上自己名字的项目,比如我的项目地址:<code>git@github.com:HappyQuQu/happyququ.github.io.git</code></li>
-<li>将自己电脑上生成的SSH pubkey保存在GitHub上</li>
-<li>在Hexo的_config.xml文件里填上自己的项目地址</li>
->>>>>>> cd150aac0cf072a3ab1d6d287666422d78400c18
 </ul>
 
 <pre class="line-numbers"><code class="language-text">deploy:
@@ -957,11 +910,7 @@ sudo npm install
 
 <ul>
 <li><p>在项目的根目录，新建名为CNAME的文件，内容为：你的域名，例如我的就是:<code>qudev.top</code></p></li>
-<<<<<<< HEAD
 <li><p>再到把你的域名指向你的 <code>happyququ.github.io</code>，几分钟过后，就可以看到成功的诞生了。</p></li>
-=======
-<li><p>再到把你的域名指向你的<code>happyququ.github.io</code>，几分钟过后，就可以看到成功的诞生了。</p></li>
->>>>>>> cd150aac0cf072a3ab1d6d287666422d78400c18
 </ul>
 
 ]]></content>
