@@ -1,0 +1,445 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  树莓派下搭建PT/BT下载器 - Qu Blog
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Qu Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:blog.qudev.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Qu Blog</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="Hexo.html">Hexo</a></li>
+        
+            <li><a href="Git.html">Git</a></li>
+        
+            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
+        
+            <li><a href="SSR.html">SSR</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Android.html">Android</a></li>
+        
+            <li><a href="SQL.html">SQL</a></li>
+        
+            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>树莓派下搭建PT/BT下载器</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/6/16</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='RaspberryPi.html'>RaspberryPi</a></span>
+           
+         
+          <span class="comments">
+            
+              <a href="http://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件</p>
+
+<h2 id="toc_0">安装Transminssion</h2>
+
+<p>一般默认的源里面就有所以直接下载</p>
+
+<pre class="line-numbers"><code class="language-bash">sudo apt-get update
+sudo apt-get install -y transmission-daemon
+</code></pre>
+
+<h2 id="toc_1">修改默认配置文件</h2>
+
+<pre class="line-numbers"><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
+</code></pre>
+
+<p>配置比较多但是其实只要配置几个关键的点就行了</p>
+
+<h4 id="toc_2">下载目录</h4>
+
+<p>我的下载目录是挂载的一块3T的硬盘</p>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+</code></pre>
+
+<h4 id="toc_3">未完成目录</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+</code></pre>
+
+<h4 id="toc_4">远程控制管理</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+&quot;rpc-whitelist-enabled&quot;: false,
+</code></pre>
+
+<p>如果想指定特定IP管理的话可以把<code>rpc-whitelist</code>设置成<code>192.168.1.*</code>.<br/>
+我的话没有修改,而是直接把<code>rpc-whitelist-enabled</code>改成<code>false</code>,这样就不走白名单模式</p>
+
+<h4 id="toc_5">远程用户名密码</h4>
+
+<pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
+&quot;rpc-password&quot;: &quot;123456&quot;,
+</code></pre>
+
+<p>密码是加密的,没关系直接把密码改为你想要的密码明文就可以,重启服务后会自动帮你加密</p>
+
+<h4 id="toc_6">重载配置和服务</h4>
+
+<pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
+sudo service transmission-daemon restart
+</code></pre>
+
+<p>注意以下两个命令按顺序执行,单独restart的话配置不会保存</p>
+
+<h2 id="toc_7">远程管理</h2>
+
+<p>浏览器中访问IP加9091端口：比如:<a href="http://192.168.1.200:9091/">http://192.168.1.200:9091/</a>.<br/>
+输入你配置的用户名密码直接可以程管理</p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.14.12.png" alt="屏幕快照 2018-06-16 11.14.12"/></p>
+
+<p>网页管理比较简单,我一般都是用远程客户端管理的</p>
+
+<h4 id="toc_8">桌面客户端</h4>
+
+<p>Mac和Win可以用开源的TransGUI来管理,下载地址:<a href="https://github.com/transmission-remote-gui/transgui/releases">点我</a> </p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.19.44.png" alt="屏幕快照 2018-06-16 11.19.44"/></p>
+
+<h4 id="toc_9">Android客户端</h4>
+
+<p>安卓的话我用Transmission Remote,下载地址:<a href="https://play.google.com/store/apps/details?id=net.yupol.transmissionremote.app">点我</a></p>
+
+<p><img src="media/15291175282135/unnamed.png" alt="unnamed"/></p>
+
+<p>貌似Transdroid也不错,下载地址:<a href="http://www.transdroid.org">点我</a><br/>
+<img src="media/15291175282135/transdroid-2.5.1-main-576x1024.png" alt="transdroid-2.5.1-main-576x1024"/></p>
+
+<h4 id="toc_10">外网管理</h4>
+
+<p>如果想外网管理的话需要在路由器上做端口转发,把9091映射成你想要端口</p>
+
+<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.26.02.png" alt="屏幕快照 2018-06-16 11.26.02"/></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15329576127138.html" 
+          title="Previous Post: Sql Server大文件处理">&laquo; Sql Server大文件处理</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15291142264885.html" 
+          title="Next Post: Linux下给移动硬盘分区">Linux下给移动硬盘分区 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+            <div id="disqus_thread"></div>
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://avatars1.githubusercontent.com/u/4098823?s=460&v=4" /></div>
+            
+                <h1>Qu Blog</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/EvanQuXh" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/HappyQuQu" title="GitHub">GitHub</a>
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="Hexo.html"><strong>Hexo</strong></a>
+        
+            <a href="Git.html"><strong>Git</strong></a>
+        
+            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
+        
+            <a href="SSR.html"><strong>SSR</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Android.html"><strong>Android</strong></a>
+        
+            <a href="SQL.html"><strong>SQL</strong></a>
+        
+            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15329576127138.html">Sql Server大文件处理</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15291142264885.html">Linux下给移动硬盘分区</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15282803325957.html">Sql Server 日期格式化</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'evanqublog'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'evanqublog'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>
