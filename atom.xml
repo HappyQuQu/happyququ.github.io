@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-  <updated>2019-01-11T14:33:38+08:00</updated>
+  <updated>2019-01-31T23:23:10+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,12 +13,12 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[Sql Server大文件处理]]></title>
+    <title type="html"><![CDATA[Sql Server 大文件处理]]></title>
     <link href="http://blog.qudev.top/15329576127138.html"/>
     <updated>2018-07-30T21:33:32+08:00</updated>
     <id>http://blog.qudev.top/15329576127138.html</id>
     <content type="html"><![CDATA[
-<pre class="line-numbers"><code class="language-bash">osql -S &#39;192.168.100.106\SQL2012&#39; -d TESTDB  -U TESTUSER -P TESTPASSWD -i C:\dbo.HEAD.Table.sql
+<pre class="line-numbers"><code class="language-text">osql -S &#39;192.168.100.106\SQL2012&#39; -d TESTDB  -U TESTUSER -P TESTPASSWD -i C:\dbo.HEAD.Table.sql
 </code></pre>
 
 <ul>
