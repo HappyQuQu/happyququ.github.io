@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-  <updated>2019-05-31T15:04:18+08:00</updated>
+  <updated>2019-05-31T15:11:49+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -20,7 +20,7 @@
     <content type="html"><![CDATA[
 <h3 id="toc_0">前言</h3>
 
-<p>最近老是要远程到公司的办公网络处理事情,公司虽然有 VPN 可以连接到公司内网,但是 MacOS 下无法连接 PPTP 的 VPN 所以想搭建一个一个内网穿透的服务,首先想到的就是最近比较火的 frp </p>
+<p>最近老是要远程到公司的办公网络处理事情,公司虽然有 VPN 可以连接到公司内网,但是 MacOS 下无法连接 PPTP 的 VPN 所以想搭建一个内网穿透的服务,首先想到的就是最近比较火的 frp </p>
 
 <p>frp 需要一台公网服务器,因为我平时几乎不会用到 VPS,所以单纯为了 frp 去买一个 VPS 有点浪费,因此想到了把 frp 服务部署在路由器上,我家的路由是梅林系统</p>
 
@@ -135,7 +135,7 @@ tcp_mux = true
 /jffs/.koolshare/bin/frps -c /jffs/configs/frps.ini
 </code></pre>
 
-<p>查看运行日志,看下服务是否正常运行,如果日中中出现 <code>Start frps success</code>,说明运行成功</p>
+<p>查看运行日志,看下服务是否正常运行,如果日志中出现 <code>Start frps success</code>,说明运行成功</p>
 
 <pre class="line-numbers"><code class="language-text">cat /tmp/frps.log
 </code></pre>
