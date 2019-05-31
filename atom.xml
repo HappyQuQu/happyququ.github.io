@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="http://blog.qudev.top/atom.xml" rel="self"/>
   <link href="http://blog.qudev.top/"/>
-  <updated>2019-05-31T15:11:49+08:00</updated>
+  <updated>2019-05-31T15:13:29+08:00</updated>
   <id>http://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -263,7 +263,7 @@ remote_port = 33890
 <li>server_addr 配置你 frps 的 ddns 域名</li>
 <li>server_port 与 frps 配置里面的 bind_port 一致</li>
 <li>token 也是与 frps 配置里面的 token 一致</li>
-<li>log_file 我这里没有写 ./frpc.log,因为如果配置自启动的话会把日志文件爆粗安在自启动文件夹下</li>
+<li>log_file 我这里没有写 ./frpc.log,因为如果配置自启动的话会把日志文件写在自启动文件夹下,开机会把日志弹出来</li>
 </ul>
 
 <p>因为我是要远程桌面到公司的电脑,所以我配置了一个 <code>RDP</code> 的节点,映射本地远程端口 3389 到 33890 这样,我在外网远程公司电脑,就只需要域名:33890 就可以</p>
