@@ -48,7 +48,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -121,7 +121,7 @@
           <h1>树莓派下搭建PT/BT下载器</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/6/16</span>
+          <span class="date">2018/06/16 10:52 上午</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -130,7 +130,7 @@
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
+              <a href="https://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
             
 
             
@@ -140,19 +140,20 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件</p>
+      <p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件<br/>
+<span id="more"></span><!-- more --></p>
 
 <h2 id="toc_0">安装Transminssion</h2>
 
 <p>一般默认的源里面就有所以直接下载</p>
 
-<pre class="line-numbers"><code class="language-bash">sudo apt-get update
+<pre><code class="language-bash">sudo apt-get update
 sudo apt-get install -y transmission-daemon
 </code></pre>
 
 <h2 id="toc_1">修改默认配置文件</h2>
 
-<pre class="line-numbers"><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
+<pre><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
 </code></pre>
 
 <p>配置比较多但是其实只要配置几个关键的点就行了</p>
@@ -161,17 +162,17 @@ sudo apt-get install -y transmission-daemon
 
 <p>我的下载目录是挂载的一块3T的硬盘</p>
 
-<pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+<pre><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
 </code></pre>
 
 <h4 id="toc_3">未完成目录</h4>
 
-<pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+<pre><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
 </code></pre>
 
 <h4 id="toc_4">远程控制管理</h4>
 
-<pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
+<pre><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
 &quot;rpc-whitelist-enabled&quot;: false,
 </code></pre>
 
@@ -180,7 +181,7 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_5">远程用户名密码</h4>
 
-<pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
+<pre><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
 &quot;rpc-password&quot;: &quot;123456&quot;,
 </code></pre>
 
@@ -188,7 +189,7 @@ sudo apt-get install -y transmission-daemon
 
 <h4 id="toc_6">重载配置和服务</h4>
 
-<pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
+<pre><code class="language-bash">sudo service transmission-daemon reload
 sudo service transmission-daemon restart
 </code></pre>
 
@@ -233,16 +234,16 @@ sudo service transmission-daemon restart
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15329576127138.html" 
-          title="Previous Post: Sql Server 大文件处理">&laquo; Sql Server 大文件处理</a>
+          <a href="15291142264885.html" 
+          title="Previous Post: Linux下给移动硬盘分区">&laquo; Linux下给移动硬盘分区</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15291142264885.html" 
-          title="Next Post: Linux下给移动硬盘分区">Linux下给移动硬盘分区 &raquo;</a>
+          <a  href="15247480658840.html" 
+          title="Next Post: Hexo 安装和部署">Hexo 安装和部署 &raquo;</a>
       
       </p>
         </div>
@@ -335,33 +336,35 @@ sudo service transmission-daemon restart
 	      
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="15247482527226.html">Git常用命令</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="15247483205460.html">CentOS下部署SSR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="15247501426506.html">CentOS安装TCP-BBR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="15247502619814.html">Ubuntu双网卡配置</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291142264885.html">Linux下给移动硬盘分区</a>
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
 			      </li>
 		     
+		  
+		      
 		  
 		      
 		  
@@ -406,7 +409,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'evanqublog'; 
+    var disqus_shortname = 'Qu's Blog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -416,7 +419,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'evanqublog'; 
+var disqus_shortname = 'Qu's Blog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;

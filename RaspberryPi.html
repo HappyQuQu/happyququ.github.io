@@ -48,7 +48,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -125,89 +125,7 @@
                       
                       <div class="a-content-text">
                         
-                        	<p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件</p>
-
-<h2 id="toc_0">安装Transminssion</h2>
-
-<p>一般默认的源里面就有所以直接下载</p>
-
-<pre class="line-numbers"><code class="language-bash">sudo apt-get update
-sudo apt-get install -y transmission-daemon
-</code></pre>
-
-<h2 id="toc_1">修改默认配置文件</h2>
-
-<pre class="line-numbers"><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
-</code></pre>
-
-<p>配置比较多但是其实只要配置几个关键的点就行了</p>
-
-<h4 id="toc_2">下载目录</h4>
-
-<p>我的下载目录是挂载的一块3T的硬盘</p>
-
-<pre class="line-numbers"><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
-</code></pre>
-
-<h4 id="toc_3">未完成目录</h4>
-
-<pre class="line-numbers"><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
-</code></pre>
-
-<h4 id="toc_4">远程控制管理</h4>
-
-<pre class="line-numbers"><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
-&quot;rpc-whitelist-enabled&quot;: false,
-</code></pre>
-
-<p>如果想指定特定IP管理的话可以把<code>rpc-whitelist</code>设置成<code>192.168.1.*</code>.<br/>
-我的话没有修改,而是直接把<code>rpc-whitelist-enabled</code>改成<code>false</code>,这样就不走白名单模式</p>
-
-<h4 id="toc_5">远程用户名密码</h4>
-
-<pre class="line-numbers"><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
-&quot;rpc-password&quot;: &quot;123456&quot;,
-</code></pre>
-
-<p>密码是加密的,没关系直接把密码改为你想要的密码明文就可以,重启服务后会自动帮你加密</p>
-
-<h4 id="toc_6">重载配置和服务</h4>
-
-<pre class="line-numbers"><code class="language-bash">sudo service transmission-daemon reload
-sudo service transmission-daemon restart
-</code></pre>
-
-<p>注意以下两个命令按顺序执行,单独restart的话配置不会保存</p>
-
-<h2 id="toc_7">远程管理</h2>
-
-<p>浏览器中访问IP加9091端口：比如:<a href="http://192.168.1.200:9091/">http://192.168.1.200:9091/</a>.<br/>
-输入你配置的用户名密码直接可以程管理</p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.14.12.png" alt="屏幕快照 2018-06-16 11.14.12"/></p>
-
-<p>网页管理比较简单,我一般都是用远程客户端管理的</p>
-
-<h4 id="toc_8">桌面客户端</h4>
-
-<p>Mac和Win可以用开源的TransGUI来管理,下载地址:<a href="https://github.com/transmission-remote-gui/transgui/releases">点我</a> </p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.19.44.png" alt="屏幕快照 2018-06-16 11.19.44"/></p>
-
-<h4 id="toc_9">Android客户端</h4>
-
-<p>安卓的话我用Transmission Remote,下载地址:<a href="https://play.google.com/store/apps/details?id=net.yupol.transmissionremote.app">点我</a></p>
-
-<p><img src="media/15291175282135/unnamed.png" alt="unnamed"/></p>
-
-<p>貌似Transdroid也不错,下载地址:<a href="http://www.transdroid.org">点我</a><br/>
-<img src="media/15291175282135/transdroid-2.5.1-main-576x1024.png" alt="transdroid-2.5.1-main-576x1024"/></p>
-
-<h4 id="toc_10">外网管理</h4>
-
-<p>如果想外网管理的话需要在路由器上做端口转发,把9091映射成你想要端口</p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.26.02.png" alt="屏幕快照 2018-06-16 11.26.02"/></p>
+                        	<p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件<br/>
 
                         
                       </div>
@@ -215,17 +133,58 @@ sudo service transmission-daemon restart
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/6/16</span>
+                   <a href="15291175282135.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/06/16 10:52 上午</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='RaspberryPi.html'>RaspberryPi</a></span>
           				   
+                    
+
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
-                        <a href="http://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
+                        <a href="https://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15670843229326.html">
+                
+                  <h1>树莓派下搭建NextCloud云盘</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">前言</h2>
+
+<p>最近买了树莓派4B,USB 有两个接口升级成了USB3.0,有线网口也升级成了千兆网络,这么好的硬件,不拿来干点事情有点浪费了,所以准备搭建 NextCloud 网盘来临时充当个人网盘使用.<br/>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15670843229326.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2019/08/29 21:12 下午</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='RaspberryPi.html'>RaspberryPi</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://blog.qudev.top/15670843229326.html#disqus_thread">comments</a>
                       
 
                        
@@ -323,33 +282,35 @@ sudo service transmission-daemon restart
 	      
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="15247482527226.html">Git常用命令</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="15247483205460.html">CentOS下部署SSR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="15247501426506.html">CentOS安装TCP-BBR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="15247502619814.html">Ubuntu双网卡配置</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291142264885.html">Linux下给移动硬盘分区</a>
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
 			      </li>
 		     
+		  
+		      
 		  
 		      
 		  
@@ -394,7 +355,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'evanqublog'; 
+    var disqus_shortname = 'Qu's Blog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -404,7 +365,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'evanqublog'; 
+var disqus_shortname = 'Qu's Blog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;

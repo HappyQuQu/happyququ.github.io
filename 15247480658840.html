@@ -48,7 +48,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -121,7 +121,7 @@
           <h1>Hexo 安装和部署</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/4/26</span>
+          <span class="date">2018/04/26 21:07 下午</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -130,7 +130,7 @@
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15247480658840.html#disqus_thread">comments</a>
+              <a href="https://blog.qudev.top/15247480658840.html#disqus_thread">comments</a>
             
 
             
@@ -144,25 +144,27 @@
 
 <p>NodeJs 安装</p>
 
-<pre class="line-numbers"><code class="language-text">sudo apt install NodeJs
+<pre><code class="language-text">sudo apt install NodeJs
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <h3 id="toc_1">Hexo 安装</h3>
 
-<pre class="line-numbers"><code class="language-text">sudo npm install hexo-cli -g
+<pre><code class="language-text">sudo npm install hexo-cli -g
 </code></pre>
 
 <p>如果出现 <code>sh: 1: cannot create highlight_alias.json: Permission denied</code> 错误,尝试执行 <code>sudo npm config set unsafe-perm true</code>，依然不行按照官方解决方案尝试 <a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">fixing-npm-permissions</a></p>
 
 <h3 id="toc_2">初始化 Hexo</h3>
 
-<pre class="line-numbers"><code class="language-text">hexo init blog
+<pre><code class="language-text">hexo init blog
 sudo npm install
 </code></pre>
 
 <h3 id="toc_3">安装 Git 发布插件</h3>
 
-<pre class="line-numbers"><code class="language-text">sudo npm install hexo-deployer-git --save
+<pre><code class="language-text">sudo npm install hexo-deployer-git --save
 </code></pre>
 
 <ul>
@@ -171,7 +173,7 @@ sudo npm install
 <li>在 Hexo 的 _config.xml 文件里填上自己的项目地址</li>
 </ul>
 
-<pre class="line-numbers"><code class="language-text">deploy:
+<pre><code class="language-text">deploy:
   type: git
   repo: git@github.com:HappyQuQu/happyququ.github.io.git
 </code></pre>
@@ -190,13 +192,16 @@ sudo npm install
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15247482527226.html" 
-          title="Previous Post: Git常用命令">&laquo; Git常用命令</a>
+          <a href="15291175282135.html" 
+          title="Previous Post: 树莓派下搭建PT/BT下载器">&laquo; 树莓派下搭建PT/BT下载器</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15592789505554.html" 
+          title="Next Post: frp 内网穿透服务搭建">frp 内网穿透服务搭建 &raquo;</a>
       
       </p>
         </div>
@@ -289,33 +294,35 @@ sudo npm install
 	      
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="15247482527226.html">Git常用命令</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="15247483205460.html">CentOS下部署SSR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="15247501426506.html">CentOS安装TCP-BBR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="15247502619814.html">Ubuntu双网卡配置</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291142264885.html">Linux下给移动硬盘分区</a>
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
 			      </li>
 		     
+		  
+		      
 		  
 		      
 		  
@@ -360,7 +367,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'evanqublog'; 
+    var disqus_shortname = 'Qu's Blog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -370,7 +377,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'evanqublog'; 
+var disqus_shortname = 'Qu's Blog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;

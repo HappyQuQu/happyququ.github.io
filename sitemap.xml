@@ -1,125 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-  <loc>http://blog.qudev.top/</loc>
-  <lastmod>2019-05-31T15:13:53+08:00</lastmod>
+  <loc>https://blog.qudev.top/</loc>
+  <lastmod>2019-10-28T20:12:21+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15592789505554.html</loc>
+  <loc>https://blog.qudev.top/15670843229326.html</loc>
+  <lastmod>2019-08-29T21:12:02+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/15592789505554.html</loc>
   <lastmod>2019-05-31T13:02:30+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15542211549503.html</loc>
+  <loc>https://blog.qudev.top/15542211549503.html</loc>
   <lastmod>2019-04-03T00:05:54+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15329576127138.html</loc>
+  <loc>https://blog.qudev.top/15329576127138.html</loc>
   <lastmod>2018-07-30T21:33:32+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15291175282135.html</loc>
+  <loc>https://blog.qudev.top/15291175282135.html</loc>
   <lastmod>2018-06-16T10:52:08+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15291142264885.html</loc>
+  <loc>https://blog.qudev.top/15291142264885.html</loc>
   <lastmod>2018-06-16T09:57:06+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15282803325957.html</loc>
+  <loc>https://blog.qudev.top/15282803325957.html</loc>
   <lastmod>2018-06-06T18:18:52+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15276843925995.html</loc>
+  <loc>https://blog.qudev.top/15276843925995.html</loc>
   <lastmod>2018-05-30T20:46:32+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15273352175202.html</loc>
+  <loc>https://blog.qudev.top/15273352175202.html</loc>
   <lastmod>2018-05-26T19:46:57+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247502619814.html</loc>
+  <loc>https://blog.qudev.top/15247502619814.html</loc>
   <lastmod>2018-04-26T21:44:21+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247502067836.html</loc>
+  <loc>https://blog.qudev.top/15247502067836.html</loc>
   <lastmod>2018-04-26T21:43:26+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247501426506.html</loc>
+  <loc>https://blog.qudev.top/15247501426506.html</loc>
   <lastmod>2018-04-26T21:42:22+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247483205460.html</loc>
+  <loc>https://blog.qudev.top/15247483205460.html</loc>
   <lastmod>2018-04-26T21:12:00+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247482751395.html</loc>
+  <loc>https://blog.qudev.top/15247482751395.html</loc>
   <lastmod>2018-04-26T21:11:15+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247482527226.html</loc>
+  <loc>https://blog.qudev.top/15247482527226.html</loc>
   <lastmod>2018-04-26T21:10:52+08:00</lastmod>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/15247480658840.html</loc>
+  <loc>https://blog.qudev.top/15247480658840.html</loc>
   <lastmod>2018-04-26T21:07:45+08:00</lastmod>
 </url>
 
 
 
 <url>
-  <loc>http://blog.qudev.top/Hexo.html</loc>
+  <loc>https://blog.qudev.top/Hexo.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/Git.html</loc>
+  <loc>https://blog.qudev.top/Git.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/%E6%AD%A3%E5%88%99.html</loc>
+  <loc>https://blog.qudev.top/%E6%AD%A3%E5%88%99.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/SSR.html</loc>
+  <loc>https://blog.qudev.top/SSR.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/Mac.html</loc>
+  <loc>https://blog.qudev.top/Mac.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/Linux.html</loc>
+  <loc>https://blog.qudev.top/Linux.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/Android.html</loc>
+  <loc>https://blog.qudev.top/Android.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/SQL.html</loc>
+  <loc>https://blog.qudev.top/SQL.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/RaspberryPi.html</loc>
+  <loc>https://blog.qudev.top/RaspberryPi.html</loc>
 </url>
 
 <url>
-  <loc>http://blog.qudev.top/frp.html</loc>
+  <loc>https://blog.qudev.top/frp.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/Hexotag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/PTtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/NextCloudtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E5%8F%8C%E7%BD%91%E5%8D%A1tag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E4%B8%8B%E8%BD%BDtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/BTtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/MacOStag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/SQLtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/Gittag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/Ubuntutag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/SQLServertag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E6%A0%91%E8%8E%93%E6%B4%BEtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/SSRtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85tag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/ADBtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E6%AD%A3%E5%88%99tag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/CentOStag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/%E5%88%86%E5%8C%BAtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/BBRtag_.html</loc>
+</url>
+
+<url>
+  <loc>https://blog.qudev.top/Linuxtag_.html</loc>
 </url>
 
 

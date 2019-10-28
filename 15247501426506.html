@@ -48,7 +48,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -121,7 +121,7 @@
           <h1>CentOS安装TCP-BBR</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/4/26</span>
+          <span class="date">2018/04/26 21:42 下午</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -130,7 +130,7 @@
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15247501426506.html#disqus_thread">comments</a>
+              <a href="https://blog.qudev.top/15247501426506.html#disqus_thread">comments</a>
             
 
             
@@ -142,9 +142,10 @@
       <div class="article-content">
       <h2 id="toc_0">安装步骤</h2>
 
-<p>使用root用户登录,运行以下命令:</p>
+<p>使用root用户登录,运行以下命令:<br/>
+<span id="more"></span><!-- more --></p>
 
-<pre class="line-numbers"><code class="language-bash">wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; bash bbr.sh
+<pre><code class="language-bash">wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; bash bbr.sh
 </code></pre>
 
 <p>安装完成后,脚本会提示需要重启 VPS,输入 y 并回车后重启</p>
@@ -153,7 +154,7 @@
 
 <p>重启完成后,进入 VPS,验证一下是否成功安装最新内核并开启 TCP BBR,输入以下命令:</p>
 
-<pre class="line-numbers"><code class="language-bash">uname -r
+<pre><code class="language-bash">uname -r
 # 查看内核版本,含有 4.9.0 就表示 OK 了
 # ————————————
 sysctl net.ipv4.tcp_available_congestion_control
@@ -174,7 +175,7 @@ lsmod | grep bbr
 
 <h2 id="toc_2">使用方法</h2>
 
-<pre class="line-numbers"><code class="language-bash"># 启动BBR
+<pre><code class="language-bash"># 启动BBR
 bash bbr.sh start
  
 # 关闭BBR
@@ -188,7 +189,7 @@ bash bbr.sh status
 
 <h2 id="toc_3">升级BBR</h2>
 
-<pre class="line-numbers"><code class="language-bash">bash bbr.sh
+<pre><code class="language-bash">bash bbr.sh
 # 重新执行脚本会检测最新内核和当前内核对比版本
 </code></pre>
 
@@ -201,16 +202,16 @@ bash bbr.sh status
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15247502067836.html" 
-          title="Previous Post: macOS U盘安装盘制作">&laquo; macOS U盘安装盘制作</a>
+          <a href="15247483205460.html" 
+          title="Previous Post: CentOS下部署SSR">&laquo; CentOS下部署SSR</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15247483205460.html" 
-          title="Next Post: CentOS下部署SSR">CentOS下部署SSR &raquo;</a>
+          <a  href="15247502619814.html" 
+          title="Next Post: Ubuntu双网卡配置">Ubuntu双网卡配置 &raquo;</a>
       
       </p>
         </div>
@@ -303,33 +304,35 @@ bash bbr.sh status
 	      
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="15247482527226.html">Git常用命令</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="15247483205460.html">CentOS下部署SSR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="15247501426506.html">CentOS安装TCP-BBR</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="15247502619814.html">Ubuntu双网卡配置</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291142264885.html">Linux下给移动硬盘分区</a>
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
 			      </li>
 		     
+		  
+		      
 		  
 		      
 		  
@@ -374,7 +377,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'evanqublog'; 
+    var disqus_shortname = 'Qu's Blog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -384,7 +387,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'evanqublog'; 
+var disqus_shortname = 'Qu's Blog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;

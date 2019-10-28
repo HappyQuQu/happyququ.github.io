@@ -1,0 +1,785 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  树莓派下搭建NextCloud云盘 - Qu Blog
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Qu Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:blog.qudev.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Qu Blog</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="Hexo.html">Hexo</a></li>
+        
+            <li><a href="Git.html">Git</a></li>
+        
+            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
+        
+            <li><a href="SSR.html">SSR</a></li>
+        
+            <li><a href="Mac.html">Mac</a></li>
+        
+            <li><a href="Linux.html">Linux</a></li>
+        
+            <li><a href="Android.html">Android</a></li>
+        
+            <li><a href="SQL.html">SQL</a></li>
+        
+            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
+        
+            <li><a href="frp.html">frp</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>树莓派下搭建NextCloud云盘</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2019/08/29 21:12 下午</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='RaspberryPi.html'>RaspberryPi</a></span>
+           
+         
+          <span class="comments">
+            
+              <a href="https://blog.qudev.top/15670843229326.html#disqus_thread">comments</a>
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">前言</h2>
+
+<p>最近买了树莓派4B,USB 有两个接口升级成了USB3.0,有线网口也升级成了千兆网络,这么好的硬件,不拿来干点事情有点浪费了,所以准备搭建 NextCloud 网盘来临时充当个人网盘使用.<br/>
+<span id="more"></span><!-- more --></p>
+
+<h2 id="toc_1">安装 PHP</h2>
+
+<p>Raspbian 最新的系统源里面默认最新的是 PHP7.1,NextCloud 推荐使用7.3.所以我们首先需要把源更新成最新的</p>
+
+<h3 id="toc_2">安装软件源拓展工具</h3>
+
+<pre><code class="language-bash">sudo apt -y install software-properties-common apt-transport-https lsb-release ca-certificates
+</code></pre>
+
+<h3 id="toc_3">添加 GPG</h3>
+
+<pre><code class="language-bash">sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://mirror.xtom.com.hk/sury/php/apt.gpg
+</code></pre>
+
+<h3 id="toc_4">添加 Sury 软件源</h3>
+
+<pre><code class="language-bash">sudo sh -c &#39;echo &quot;deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/php.list&#39;  
+</code></pre>
+
+<h3 id="toc_5">安装 PHP7.3</h3>
+
+<pre><code class="language-bash">sudo apt update
+sudo apt install -y php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-json php7.3-xml php7.3-zip php7.3-mbstring openssl
+</code></pre>
+
+<h3 id="toc_6">配置 PHP</h3>
+
+<p>安装 PHP7.3 和 NextCloud 需要用的相关组件.安装完成后修改 <code>php.ini</code> 文件</p>
+
+<pre><code class="language-bash">sudo vim /etc/php/7.3/php.ini
+</code></pre>
+
+<p>找到<code>;cgi.fix_pathinfo=1</code>,把<code>;</code>去掉,然后把·改成0</p>
+
+<h3 id="toc_7">PHP 服务相关</h3>
+
+<p>将 php-fpm 设置为自启动</p>
+
+<pre><code class="language-bash">sudo systemctl enable php7.3-fpm
+</code></pre>
+
+<p>启用 php7.3-fpm </p>
+
+<pre><code class="language-bash">sudo service php7.3-fpm start
+</code></pre>
+
+<p>重启 php-7.3fpm</p>
+
+<pre><code class="language-bash">sudo service php7.3-fpm restart
+</code></pre>
+
+<p>停止 php7.3-fpm</p>
+
+<pre><code class="language-bash">sudo service php7.3-fpm stop
+</code></pre>
+
+<h2 id="toc_8">安装 Nginx</h2>
+
+<h3 id="toc_9">安装 Nginx</h3>
+
+<pre><code class="language-bash">sudo apt install -y nginx
+</code></pre>
+
+<p>打开地址<code>http://树莓派ip/</code>出现一下界面说明安装成功<br/>
+<img src="media/15670843229326/index-nginx.png" alt="index-nginx"/></p>
+
+<h3 id="toc_10">Nginx 服务相关</h3>
+
+<p>将 Nginx 设置为自启动</p>
+
+<pre><code class="language-bash">sudo systemctl enable nginx
+</code></pre>
+
+<p>启用 Nginx</p>
+
+<pre><code class="language-bash">sudo service nginx start
+</code></pre>
+
+<p>重启 Nginx</p>
+
+<pre><code class="language-bash">sudo service nginx restart
+</code></pre>
+
+<p>停止 Nginx</p>
+
+<pre><code class="language-bash">sudo service nginx stop
+</code></pre>
+
+<h2 id="toc_11">安装 MariaDB</h2>
+
+<h3 id="toc_12">安装 MariaDB</h3>
+
+<pre><code class="language-bash">sudo apt install -y mariadb-server
+</code></pre>
+
+<h3 id="toc_13">初始化 MariaDB</h3>
+
+<pre><code class="language-bash">sudo mysql_secure_installation
+</code></pre>
+
+<p>首先会让你输入当前 <code>root</code> 密码,因为没有 <code>root</code> 密码,直接回车.<br/>
+<img src="media/15670843229326/mariadb1.png" alt="mariadb1"/></p>
+
+<p>然后初始化 <code>root</code> 密码,<br/>
+<img src="media/15670843229326/mariadb2.png" alt="mariadb2"/><br/>
+然后剩余选项全都默认回车就行了.当看见以后提示,说明初始化完成<br/>
+<img src="media/15670843229326/mariadb3.png" alt="mariadb3"/></p>
+
+<p>登陆 MariaDB 数据库</p>
+
+<pre><code class="language-bash">sudo -uroot -p
+</code></pre>
+
+<p>如果出现登录失败的错误,重启下 <code>MariaDB</code> 服务器后重新登陆就行了</p>
+
+<h2 id="toc_14">安装 NextCloud</h2>
+
+<h3 id="toc_15">安装 NextCloud</h3>
+
+<p>下载安装包</p>
+
+<pre><code class="language-bash">sudo wget https://download.nextcloud.com/server/releases/nextcloud-16.0.4.zip
+</code></pre>
+
+<p>解压 NextCloud 安装包,移动到 Nginx 的 <code>web</code> 根目录下,我的根目录一般设置成 <code>/var/www/</code></p>
+
+<pre><code class="language-bash">sudo unzip nextcloud-16.0.4.zip
+sudo mv nextcloud /var/www/
+</code></pre>
+
+<p>给 Nginx 的默认用户赋予读写 <code>nextcloud</code> 文件夹的权限</p>
+
+<pre><code class="language-bash">sudo chown -R www-data /var/www/nextcloud
+</code></pre>
+
+<h3 id="toc_16">配置 Nginx</h3>
+
+<p>修改 <code>nginx.conf</code> 全局配置文件</p>
+
+<pre><code class="language-bash">sudo vim /etc/nginx/nginx.conf
+</code></pre>
+
+<p>找到 <code>include /etc/nginx/sites-enabled/*;</code> 注释掉.</p>
+
+<p>因为我要启用 https 所以我把 ssl 的证书也配置在全局文件里面了,这样子所有的子文件夹都开启 ssl 了.添加 ssl 设置,证书在 <code>cert</code> 文件夹内</p>
+
+<pre><code class="language-text">ssl on;
+ssl_certificate   cert/2296431_123.abc.com.pem;
+ssl_certificate_key  cert/2296431_123.abc.com.key;
+ssl_session_timeout 5m;
+ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_prefer_server_ciphers on;
+</code></pre>
+
+<p>接下来从默认配置文件文件里面复制一个,到 <code>/etc/nginx/conf.d/</code> 文件夹下,并且重命名为 <code>default.conf</code> ,然后编辑</p>
+
+<pre><code class="language-bash">sudo cp /etc/nginx/sites-available/default  /etc/nginx/conf.d/default.conf
+sudo vim etc/nginx/conf.d/default.conf
+</code></pre>
+
+<p>修改内容参考 NextCloud 官网的Nginx配置文件,因为我 Nginx 下面还要挂载其他网页,所以我选择子目录的配置文件.下面是我的配置文件</p>
+
+<pre><code class="language-text">upstream php-handler {
+    server unix:/var/run/php/php7.3-fpm.sock;
+}
+server {
+    listen 80;
+    listen [::]:80;
+    server_name 123.abc.com;
+    return 301 https://$server_name:$server_port$request_uri;
+}
+server {
+    listen 8082 ssl http2;
+    listen [::]:8082 ssl http2;
+    server_name 123.abc.com;
+    add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains; preload;&quot;;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection &quot;1; mode=block&quot;;
+    add_header X-Robots-Tag none;
+    add_header X-Download-Options noopen;
+    add_header X-Permitted-Cross-Domain-Policies none;
+    add_header Referrer-Policy no-referrer;
+    fastcgi_hide_header X-Powered-By;
+
+    root /var/www;
+    index index.html index.htm index.php;
+
+    #NextCloud
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+    location = /.well-known/carddav {
+        return 301 $scheme://$host:$server_port/nextcloud/remote.php/dav;
+    }
+    location = /.well-known/caldav {
+        return 301 $scheme://$host:$server_port/nextcloud/remote.php/dav;
+    }
+    location /.well-known/acme-challenge { }
+    location ^~ /nextcloud {
+        client_max_body_size 10G;
+        fastcgi_buffers 64 4K;
+        gzip on;
+        gzip_vary on;
+        gzip_comp_level 4;
+        gzip_min_length 256;
+        gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
+        gzip_types application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
+        location /nextcloud {
+            rewrite ^ /nextcloud/index.php$request_uri;
+        }
+        location ~ ^\/nextcloud\/(?:build|tests|config|lib|3rdparty|templates|data)\/ {
+            deny all;
+        }
+        location ~ ^\/nextcloud\/(?:\.|autotest|occ|issue|indie|db_|console) {
+            deny all;
+        }
+        location ~ ^\/nextcloud\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
+            fastcgi_split_path_info ^(.+?\.php)(\/.*|)$;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_param HTTPS on;
+            fastcgi_param modHeadersAvailable true;
+            fastcgi_param front_controller_active true;
+            fastcgi_pass php-handler;
+            fastcgi_intercept_errors on;
+            fastcgi_request_buffering off;
+        }
+        location ~ ^\/nextcloud\/(?:updater|oc[ms]-provider)(?:$|\/) {
+            try_files $uri/ =404;
+            index index.php;
+        }
+        location ~ ^\/nextcloud\/.+[^\/]\.(?:css|js|woff2?|svg|gif|map)$ {
+            try_files $uri /nextcloud/index.php$request_uri;
+            add_header Cache-Control &quot;public, max-age=15778463&quot;;
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection &quot;1; mode=block&quot;;
+            add_header X-Robots-Tag none;
+            add_header X-Download-Options noopen;
+            add_header X-Permitted-Cross-Domain-Policies none;
+            add_header Referrer-Policy no-referrer;
+            access_log off;
+        }
+        location ~ ^\/nextcloud\/.+[^\/]\.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
+            try_files $uri /nextcloud/index.php$request_uri;
+            access_log off;
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li><code>server_name</code> 直接填你申请好的域名</li>
+<li><code>listen 8082</code> 因为树莓派是放在家里的,家用宽带是封掉<code>443</code>,<code>80</code>端口的,所以我就把端口改为<code>8082</code>然后在路由器上做端口转发</li>
+</ul>
+
+<p>检测下 Nginx 配置是否检验通过</p>
+
+<pre><code class="language-text">sudo nginx -t
+</code></pre>
+
+<p>如果出现下面的提示,说明配置文件通过检验,否则修改配置文件中报错的地方<br/>
+<img src="media/15670843229326/nginx_test.png" alt="nginx_test"/></p>
+
+<p>然后重新加载下 Nginx</p>
+
+<pre><code class="language-bash">sudo nginx -s reload
+</code></pre>
+
+<h3 id="toc_17">配置 MariaDB 数据库</h3>
+
+<p>进入 MySQL</p>
+
+<pre><code class="language-bash">sudo mysql -u root -p
+</code></pre>
+
+<p>创建 NextCloud 数据库</p>
+
+<pre><code class="language-sql"># 创建一个名为 nextclud_db 的数据库
+CREATE DATABASE nextcloud_db;
+
+# 创建一个名为 nextcloud、密码也为 nextcloud 的用户
+CREATE USER &#39;nextcloud&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;nextcloud&#39;;
+
+# 赋予用户 nextcloud 对数据库 nextcloud_db 的所有操作权限
+GRANT ALL PRIVILEGES ON nextcloud_db.* TO &#39;nextcloud&#39;@&#39;localhost&#39;;
+
+# 刷新数据库权限
+FLUSH PRIVILEGES;
+
+# 退出
+exit
+</code></pre>
+
+<h3 id="toc_18">配置 NextCloud</h3>
+
+<p>打开 <code>https://123.abc.com:8082/nextcloud</code> 进入 NextCloud 配置界面<br/>
+<img src="media/15670843229326/nextcloud.png" alt="nextcloud"/></p>
+
+<p>新建一个用户名和密码.数据目录可以默认,也可以自己自定义目录,但是注意自定义目录记得要赋予 <code>www-data</code> 读写权限.<br/>
+数据库用户,密码和数据库名就是刚才 MariaDB 新建的信息,确认没有问题后点完成,过一会就可以进入网盘了</p>
+
+<h2 id="toc_19">优化 NextCloud</h2>
+
+<h3 id="toc_20">优化 NextCloud</h3>
+
+<p>进入设置-&gt;概括里面,NextCloud 会检查安全及设置警告,刚刚进入 NextCloud 后检查完出现4个问题.我们一个一个解决<br/>
+<img src="media/15670843229326/nextcloud_check1.png" alt="nextcloud_check1"/></p>
+
+<ol>
+<li><p>PHP 的安装似乎不正确,无法访问系统环境变量.<code>getenv(&quot;PATH&quot;)</code> 函数测试返回一个空值.<br/>
+编辑 <code>sudo vim /etc/php/7.3/fpm/pool.d/www.conf</code>,取消下面几个参数的注释</p>
+<pre><code class="language-text">;env[HOSTNAME] = $HOSTNAME
+;env[PATH] = /usr/local/bin:/usr/bin:/bin<br/>
+;env[TMP] = /tmp<br/>
+;env[TMPDIR] = /tmp<br/>
+;env[TEMP] = /tmp
+</code></pre>
+<p><img src="media/15670843229326/www.conf.png" alt="www.conf"/></p></li>
+<li><p>PHP 内存限制低于建议值<code>512MB</code><br/>
+编辑 <code>sudo vim /etc/php/7.3/fpm/php.ini</code>,找到 <code>memory_limit = 128M</code>，将<code>128M</code> 修改是<code>512M</code></p></li>
+<li><p>内存缓存为配置<br/>
+这个单独讲</p></li>
+<li><p>该实例缺失了一些推荐的 PHP 模块<br/>
+缺少什么模块我们就补齐</p>
+<pre><code class="language-bash">sudo apt install php7.3-intl php7.3-imagick
+</code></pre>
+<h2 id="toc_21">Redis 内存缓存配置</h2>
+<p>这边我们使用 Redis 来配置内存缓存</p></li>
+</ol>
+
+<h3 id="toc_22">安装 Redis</h3>
+
+<p>安装 Redis 和 PHP Redis 模块</p>
+
+<pre><code class="language-bash">sudo apt install redis-server php7.3-redis
+</code></pre>
+
+<h3 id="toc_23">配置 Redis</h3>
+
+<p>编辑 <code>sudo vim /etc/redis.conf</code>,将下列参数修改如下配置</p>
+
+<pre><code class="language-text">port 0
+unixsocket /var/run/redis/redis-server.sock
+unixsocketperm 777
+requirepass qwerasdf
+</code></pre>
+
+<p>把 redis 添加进相应的用户组</p>
+
+<pre><code class="language-bash">sudo usermod -g www-data redis
+</code></pre>
+
+<h3 id="toc_24">配置 NextCloud</h3>
+
+<p>编辑 <code>sudo vim /var/www/nextcloud/config/config.php</code>,在 <code>&#39;installed&#39; =&gt; true</code>,下面添加如下配置</p>
+
+<pre><code class="language-php">&#39;filelocking.enabled&#39; =&gt; &#39;true&#39;,
+&#39;memcache.locking&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
+&#39;memcache.local&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
+&#39;memcache.distributed&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
+&#39;redis&#39; =&gt; array (
+    &#39;host&#39; =&gt; &#39;/var/run/redis/redis-server.sock&#39;, // can also be a unix domain socket: &#39;/tmp/redis.sock&#39;
+    &#39;port&#39; =&gt; 0,
+    &#39;timeout&#39; =&gt; 0.0,
+    &#39;password&#39; =&gt; &#39;qwerasdf&#39;, // Optional, if not defined no password will be used.
+    &#39;dbindex&#39; =&gt; 0, 
+),
+</code></pre>
+
+<h3 id="toc_25">Redis 服务相关</h3>
+
+<p>将 Redis 设置为自启动</p>
+
+<pre><code class="language-bash">sudo systemctl enable redis-server
+</code></pre>
+
+<p>启用 Redis</p>
+
+<pre><code class="language-bash">sudo service redis-server start
+</code></pre>
+
+<p>重启 Redis</p>
+
+<pre><code class="language-bash">sudo service redis-server restart
+</code></pre>
+
+<p>停止 Redis</p>
+
+<pre><code class="language-bash">sudo service redis-server stop
+</code></pre>
+
+<h2 id="toc_26">NextCloud 检查通过</h2>
+
+<p><img src="media/15670843229326/nextcloud_check_success.png" alt="nextcloud_check_success"/></p>
+
+<h2 id="toc_27">参考</h2>
+
+<p><a href="https://www.mf8.biz/debian-install-php7-2/">在 Ubuntu/Debian 下安装 PHP7.2</a><br/>
+<a href="https://docs.nextcloud.com/server/16/admin_manual/installation/source_installation.html">Prerequisites for manual installation</a><br/>
+<a href="https://www.wenjinyu.me/zh/install-nextcloud-to-build-a-proprietary-personal-netdisk/">安装nextcloud：搭建一个自己专属的个人网盘</a><br/>
+<a href="https://www.jianshu.com/p/843af0af176e">使用NextCloud 12 搭建私人云服务和问题解决</a><br/>
+<a href="https://www.himstudy.net/%E8%A7%A3%E5%86%B3%E5%8D%87%E7%BA%A7nextcloud-16%E5%90%8E%EF%BC%8C%E6%8F%90%E7%A4%BAphp-%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6%E4%BD%8E%E4%BA%8E%E5%BB%BA%E8%AE%AE%E5%80%BC-512mb%E3%80%82/">解决升级nextcloud-16后，提示php-内存限制低于建议值-512mb</a><br/>
+<a href="https://docs.nextcloud.com/server/16/admin_manual/configuration_files/files_locking_transactional.html">Transactional file locking</a><br/>
+<a href="https://www.wenjinyu.me/zh/deal-with-nextcloud-warning-memory-cache-is-not-configured/">解决nextcloud警告：“内存缓存未配置”</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15592789505554.html" 
+          title="Previous Post: frp 内网穿透服务搭建">&laquo; frp 内网穿透服务搭建</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15247502067836.html" 
+          title="Next Post: macOS U盘安装盘制作">macOS U盘安装盘制作 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+            <div id="disqus_thread"></div>
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://avatars1.githubusercontent.com/u/4098823?s=460&v=4" /></div>
+            
+                <h1>Qu Blog</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/EvanQuXh" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/HappyQuQu" title="GitHub">GitHub</a>
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="Hexo.html"><strong>Hexo</strong></a>
+        
+            <a href="Git.html"><strong>Git</strong></a>
+        
+            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
+        
+            <a href="SSR.html"><strong>SSR</strong></a>
+        
+            <a href="Mac.html"><strong>Mac</strong></a>
+        
+            <a href="Linux.html"><strong>Linux</strong></a>
+        
+            <a href="Android.html"><strong>Android</strong></a>
+        
+            <a href="SQL.html"><strong>SQL</strong></a>
+        
+            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
+        
+            <a href="frp.html"><strong>frp</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15247482527226.html">Git常用命令</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15247483205460.html">CentOS下部署SSR</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15247501426506.html">CentOS安装TCP-BBR</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15247502619814.html">Ubuntu双网卡配置</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15276843925995.html">修复下载文件夹变英文</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'Qu's Blog'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'Qu's Blog'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>
