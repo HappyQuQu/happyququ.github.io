@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="https://blog.qudev.top/atom.xml" rel="self"/>
   <link href="https://blog.qudev.top/"/>
-  <updated>2019-10-28T20:12:21+08:00</updated>
+  <updated>2019-10-28T20:14:38+08:00</updated>
   <id>https://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -1178,7 +1178,7 @@ netmask 255.255.255.0
 <li>制作 macOS 安装盘
 <span id="more"></span><!-- more -->
 <code>
-sudo /Applications/&#39;Install macOS Catalina.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/macOSCatalina
+sudo /Applications/&#39;Install macOS Catalina.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/macOS
 </code></li>
 </ol>
 
