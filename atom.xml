@@ -4,7 +4,7 @@
   <title><![CDATA[Qu Blog]]></title>
   <link href="https://blog.qudev.top/atom.xml" rel="self"/>
   <link href="https://blog.qudev.top/"/>
-  <updated>2020-08-25T20:15:30+08:00</updated>
+  <updated>2020-11-13T06:46:26+08:00</updated>
   <id>https://blog.qudev.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -1180,12 +1180,12 @@ netmask 255.255.255.0
 
 <span id="more"></span><!-- more -->
 
-<pre><code class="language-text">sudo /Applications/&#39;Install macOS Catalina.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/macOS
+<pre><code class="language-text">sudo /Applications/&#39;Install macOS Big Sur.app&#39;/Contents/Resources/createinstallmedia --volume /Volumes/macOS
 </code></pre>
 
 <p>如果出现权限不够</p>
 
-<pre><code class="language-text">sudo chmod +x /Applications/&#39;Install macOS Catalina.app&#39;/Contents/Resources/createinstallmedia
+<pre><code class="language-text">sudo chmod +x /Applications/&#39;Install macOS Big Sur.app&#39;/Contents/Resources/createinstallmedia
 </code></pre>
 
 ]]></content>
