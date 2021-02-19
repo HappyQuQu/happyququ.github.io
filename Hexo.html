@@ -128,6 +128,39 @@
 <pre><code class="language-text">sudo apt install NodeJs
 </code></pre>
 
+<h3 id="toc_1">Hexo 安装</h3>
+
+<pre><code class="language-text">sudo npm install hexo-cli -g
+</code></pre>
+
+<p>如果出现 <code>sh: 1: cannot create highlight_alias.json: Permission denied</code> 错误,尝试执行 <code>sudo npm config set unsafe-perm true</code>，依然不行按照官方解决方案尝试 <a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">fixing-npm-permissions</a></p>
+
+<h3 id="toc_2">初始化 Hexo</h3>
+
+<pre><code class="language-text">hexo init blog
+sudo npm install
+</code></pre>
+
+<h3 id="toc_3">安装 Git 发布插件</h3>
+
+<pre><code class="language-text">sudo npm install hexo-deployer-git --save
+</code></pre>
+
+<ul>
+<li>在Github或者码云上自己名字的项目,比如我的项目地址: <code>git@github.com:HappyQuQu/happyququ.github.io.git</code></li>
+<li>将自己电脑上生成的 SSH pubkey 保存在 GitHub 上</li>
+<li>在 Hexo 的 _config.xml 文件里填上自己的项目地址</li>
+</ul>
+
+<pre><code class="language-text">deploy:
+  type: git
+  repo: git@github.com:HappyQuQu/happyququ.github.io.git
+</code></pre>
+
+<ul>
+<li><p>在项目的根目录，新建名为CNAME的文件，内容为：你的域名，例如我的就是:<code>qudev.top</code></p></li>
+<li><p>再到把你的域名指向你的 <code>happyququ.github.io</code>，几分钟过后，就可以看到成功的诞生了。</p></li>
+</ul>
 
                         
                       </div>
@@ -135,8 +168,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15247480658840.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/04/26 21:07 下午</span>
+                  
+                    <span class="date">2018/4/26</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='Hexo.html'>Hexo</a></span>
@@ -147,7 +180,7 @@
                   <div class="more-right right">
                   <span class="comments">
                       
-                        <a href="https://blog.qudev.top/15247480658840.html#disqus_thread">comments</a>
+                        <a href="http://blog.qudev.top/15247480658840.html#disqus_thread">comments</a>
                       
 
                        
@@ -519,7 +552,7 @@ pre[class*="language-"].line-numbers > code {
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'Qu's Blog'; 
+    var disqus_shortname = 'evanqublog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -529,7 +562,7 @@ pre[class*="language-"].line-numbers > code {
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'Qu's Blog'; 
+var disqus_shortname = 'evanqublog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;

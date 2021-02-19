@@ -125,7 +125,284 @@
 
 <p>最近老是要远程到公司的办公网络处理事情,公司虽然有 VPN 可以连接到公司内网,但是 MacOS 下无法连接 PPTP 的 VPN 所以想搭建一个内网穿透的服务,首先想到的就是最近比较火的 frp </p>
 
-<p>frp 需要一台公网服务器,因为我平时几乎不会用到 VPS,所以单纯为了 frp 去买一个 VPS 有点浪费,因此想到了把 frp 服务部署在路由器上,我家的路由是梅林系统<br/>
+<p>frp 需要一台公网服务器,因为我平时几乎不会用到 VPS,所以单纯为了 frp 去买一个 VPS 有点浪费,因此想到了把 frp 服务部署在路由器上,我家的路由是梅林系统</p>
+
+<h3 id="toc_1">准备工作</h3>
+
+<ul>
+<li>一台支持的路由器(我的是6300v2,梅林系统)</li>
+<li>路由器连接的网络具有公网 IP(我们这里电信直接打电话就行了)</li>
+</ul>
+
+<h3 id="toc_2">在路由器上部署 frps 服务端</h3>
+
+<p>首先在 frp 的 <a href="https://github.com/fatedier/frp/releases">github</a> 官网上下载对应系统的文件包,梅林系统的下载后缀位 <code>arm</code> 的文件包</p>
+
+<p>解压后将 frps 文件通过软件中心的 webshell 程序上传到路由器 <code>/tmp/</code> 目录下,然后移到软件目录下</p>
+
+<pre><code class="language-text">mv /tmp/frps /jffs/.koolshare/bin/ 
+</code></pre>
+
+<p>不要放在 <code>/tmp/</code> 和下级目录下,重启或清空所有文件的</p>
+
+<p>在本地编辑 <code>frps.ini</code> 配置文件,我的配置如下</p>
+
+<pre><code class="language-text"># [common] is integral section
+[common]
+# A literal address or host name for IPv6 must be enclosed
+# in square brackets, as in &quot;[::1]:80&quot;, &quot;[ipv6-host]:http&quot; or &quot;[ipv6-host%zone]:80&quot;
+#bind_addr = 0.0.0.0
+bind_port = 1234
+
+# udp port to help make udp hole to penetrate nat
+bind_udp_port = 1235
+
+# udp port used for kcp protocol, it can be same with &#39;bind_port&#39;
+# if not set, kcp is disabled in frps
+kcp_bind_port = 1234
+
+# specify which address proxy will listen for, default value is same with bind_addr
+# proxy_bind_addr = 127.0.0.1
+
+# if you want to support virtual host, you must set the http port for listening (optional)
+# Note: http port and https port can be same with bind_port
+#vhost_http_port = 80
+#vhost_https_port = 443
+
+# response header timeout(seconds) for vhost http server, default is 60s
+# vhost_http_timeout = 60
+
+# set dashboard_addr and dashboard_port to view dashboard of frps
+# dashboard_addr&#39;s default value is same with bind_addr
+# dashboard is available only if dashboard_port is set
+#dashboard_addr = 0.0.0.0
+dashboard_port = 12346
+
+# dashboard user and passwd for basic auth protect, if not set, both default value is admin
+dashboard_user = admin
+dashboard_pwd = admin
+
+# dashboard assets directory(only for debug mode)
+# assets_dir = ./static
+# console or real logFile path like ./frps.log
+log_file = /tmp/frps.log
+
+# trace, debug, info, warn, error
+log_level = info
+
+log_max_days = 3
+
+# auth token
+token = 123
+
+# heartbeat configure, it&#39;s not recommended to modify the default value
+# the default value of heartbeat_timeout is 90
+# heartbeat_timeout = 90
+
+# only allow frpc to bind ports you list, if you set nothing, there won&#39;t be any limit
+#allow_ports = 2000-3000,3001,3003,4000-50000
+
+# pool_count in each proxy will change to max_pool_count if they exceed the maximum value
+max_pool_count = 5
+
+# max ports can be used for each client, default value is 0 means no limit
+max_ports_per_client = 0
+
+# if subdomain_host is not empty, you can set subdomain when type is http or https in frpc&#39;s configure file
+# when subdomain is test, the host used by routing is test.frps.com
+#subdomain_host = frps.com
+
+# if tcp stream multiplexing is used, default is true
+tcp_mux = true
+
+# custom 404 page for HTTP requests
+# custom_404_page = /path/to/404.html
+
+</code></pre>
+
+<ul>
+<li>bind_port 自己定义一个端口</li>
+<li>dashboard_port 访问网页版仪表板的端口号</li>
+<li>log_file 日志路径,我这里设置的是 <code>/tmp/frps.log</code></li>
+<li>token 与客户端连接的密钥,自己定义一个</li>
+</ul>
+
+<p>将 <code>frps.ini</code> 上传到路由器上,然后移动配置目录下</p>
+
+<pre><code class="language-text"> mv /tmp/frps.ini /jffs/configs/frps.ini 
+</code></pre>
+
+<p>给 frps 文件赋予777权限,然后直接运行,看下能否正常运行</p>
+
+<pre><code class="language-text">chmod 777 /jffs/.koolshare/bin/frps
+/jffs/.koolshare/bin/frps -c /jffs/configs/frps.ini
+</code></pre>
+
+<p>查看运行日志,看下服务是否正常运行,如果日志中出现 <code>Start frps success</code>,说明运行成功</p>
+
+<pre><code class="language-text">cat /tmp/frps.log
+</code></pre>
+
+<p>这时候内网是可以指连接 frps 服务的,但是外网连接的话,端口被防火墙挡住了,所以需要开放frps的端口.</p>
+
+<p>首先打开 jffs 功能，然后在 <code>/jffs/script/</code> 下新建一个文件,名为 <code>firewall-start</code>, 并赋予<code>755</code>权限,写入内容如下</p>
+
+<pre><code class="language-text">#!/bin/sh
+iptables -I INPUT -p tcp --dport 1234 -j ACCEPT
+iptables -I INPUT -p udp --dport 1235 -j ACCEPT
+iptables -I INPUT -p tcp --dport 1236 -j ACCEPT
+</code></pre>
+
+<p>重启路由器即可。</p>
+
+<p>本来应该接下来要写如何把 frps 设后台运行和自启动的,但是发现不知道是路由cpu不行还是内存太小,导致在后台运行一段时间之后,会出现路由器断网,卡住的情况,所以直接把 frps 服务部署到树莓派上了.<br/>
+如果没有树莓派,想路由器上后台运行 frps 的话,大家自己 Google 下梅林设置后台运行的方法</p>
+
+<h3 id="toc_3">在树莓派上部署 frps 服务端</h3>
+
+<p>树莓派的 frp 版本跟梅林的一样,所以不需要重新下载了</p>
+
+<p>首先先在本地修改下 frps.ini 里面的配置,其实也没有啥修改的,就是把日志的路径改一下改成 <code>log_file = ./frps.log</code></p>
+
+<p>在树莓派上新建一个 <code>frps</code> 目录,然后把 <code>frps</code> 和 <code>frps.ini</code> 文件上传到树莓派的 <code>frps</code> 目录下</p>
+
+<p>给 frps 文件赋予777权限,然后直接运行,看下能否正常运行</p>
+
+<pre><code class="language-text">chmod 777 /home/pi/frps/frps
+/home/pi/frps/frps -c /home/pi/frps/frps.ini
+</code></pre>
+
+<p>查看运行日志,看下服务是否正常运行,如果日中中出现 <code>Start frps success</code>,说明运行成功</p>
+
+<pre><code class="language-text">cat ~/frps/frps.log
+</code></pre>
+
+<h3 id="toc_4">配置自动启用服务</h3>
+
+<p>首先先建一个 frps 的服务</p>
+
+<pre><code class="language-text">sudo vim /lib/systemd/system/frps.service
+</code></pre>
+
+<p>在 frps.service 里写入以下内容</p>
+
+<pre><code class="language-text">[Unit]
+Description=fraps service
+After=network.target network-online.target syslog.target
+Wants=network.target network-online.target
+
+[Service]
+Type=simple
+
+#启动服务的命令（此处写你的frps的实际安装目录）
+ExecStart=/home/pi/frps/frps -c /home/pi/frps/frps.ini
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<p>然后启用 frps 服务</p>
+
+<pre><code class="language-text">sudo service frps start
+</code></pre>
+
+<p>确认没有问题后,开启自启动</p>
+
+<pre><code class="language-text">sudo systemctl enable frps
+</code></pre>
+
+<p>还有一些服务常用的命令</p>
+
+<ul>
+<li>启用服务 <code>sudo service frps start</code></li>
+<li>停止服务 <code>sudo service frps stop</code></li>
+<li>重启服务 <code>sudo service frps restart</code></li>
+<li>查看服务 <code>sudo service frps status</code></li>
+</ul>
+
+<h3 id="toc_5">路由器端口映射</h3>
+
+<p>在路由器端口转发下面,映射 frps.ini 配置里面的几个端口,使其能够在外网能够访问,外网通过 ddns 域名:1236 端口访问网页版的 Dashoard,输入账号密码查看frps 服务状态</p>
+
+<p>就此 frp 的服务端配置完成</p>
+
+<h3 id="toc_6">客户端配置</h3>
+
+<p>客户端配置很简单,我公司电脑是 Windows 的,所有下载 <code>windows_amd64</code> 后缀的 frp 文件包,解压缩后放在任意位置,开打文件夹里面的 <code>frpc.ini</code> 修改配置,我的配置如下</p>
+
+<pre><code class="language-text">[common]
+server_addr = 1.2.3.4
+server_port = 1234
+
+# for authentication
+token = 123
+
+#http_proxy = http://127.0.0.1:1080
+
+log_file = C:\\Users\\Qu\\Application\\frp\\frpc.log
+
+# trace, debug, info, warn, error
+log_level = info
+
+log_max_days = 3
+
+# if tcp stream multiplexing is used, default is true, it must be same with frps
+#tcp_mux = true
+
+# set admin address for control frpc&#39;s action by http api such as reload
+admin_addr = 127.0.0.1
+admin_port = 7400
+admin_user = admin
+admin_pwd = admin
+
+[RDP]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 33890
+</code></pre>
+
+<ul>
+<li>server_addr 配置你 frps 的 ddns 域名</li>
+<li>server_port 与 frps 配置里面的 bind_port 一致</li>
+<li>token 也是与 frps 配置里面的 token 一致</li>
+<li>log_file 我这里没有写 ./frpc.log,因为如果配置自启动的话会把日志文件写在自启动文件夹下,开机会把日志弹出来</li>
+</ul>
+
+<p>因为我是要远程桌面到公司的电脑,所以我配置了一个 <code>RDP</code> 的节点,映射本地远程端口 3389 到 33890 这样,我在外网远程公司电脑,就只需要域名:33890 就可以</p>
+
+<pre><code class="language-text">[RDP]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 33890
+</code></pre>
+
+<p>然后在 cmd 里面运行 frpc 查看 <code>frpc.log</code> 文件,如果看到 <code>[RDP] start proxy success</code> 就说明已经跟 frps 服务连接成功,这时候就可以远程公司电脑了</p>
+
+<pre><code class="language-text">cd C:\Users\Qu\Application\frp
+./frpc.exe -c ./frpc.ini
+</code></pre>
+
+<h3 id="toc_7">配置 frpc 自启用</h3>
+
+<p>在文件夹下新建一个 <code>frpc.vbs</code> 内容为</p>
+
+<pre><code class="language-text">set ws=WScript.CreateObject(&quot;WScript.Shell&quot;) 
+ws.Run &quot;C:\Users\Qu\Application\frp\frpc.exe -c C:\Users\Qu\Application\frp\frpc.ini&quot;,0
+</code></pre>
+
+<p>Run 里面的路径改成你们自己的 frpc 的路径,然后保存.</p>
+
+<p>按 <code>win+R</code> 输入 <code>shell:startup</code> 将 <code>frpc.vbs</code> 放到文件夹下就可以自启动了</p>
+
+<h4 id="toc_8">参考</h4>
+
+<ul>
+<li><a href="https://github.com/fatedier/frp/releases">Github-frp</a></li>
+<li><a href="http://koolshare.cn/thread-49601-1-1.html">[固件讨论] 梅林如何设置防火墙开通6800端口</a></li>
+<li><a href="https://www.jianshu.com/p/b64f268dddc9">frp实现内网穿透并配置自动启动</a></li>
+</ul>
 
                         
                       </div>
@@ -133,8 +410,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15592789505554.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2019/05/31 13:02 下午</span>
+                  
+                    <span class="date">2019/5/31</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='frp.html'>frp</a></span>
@@ -145,7 +422,7 @@
                   <div class="more-right right">
                   <span class="comments">
                       
-                        <a href="https://blog.qudev.top/15592789505554.html#disqus_thread">comments</a>
+                        <a href="http://blog.qudev.top/15592789505554.html#disqus_thread">comments</a>
                       
 
                        
@@ -517,7 +794,7 @@ pre[class*="language-"].line-numbers > code {
 
 
 <script type="text/javascript">
-    var disqus_shortname = 'Qu's Blog'; 
+    var disqus_shortname = 'evanqublog'; 
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -527,7 +804,7 @@ pre[class*="language-"].line-numbers > code {
 </script>
 
 <script type="text/javascript">
-var disqus_shortname = 'Qu's Blog'; 
+var disqus_shortname = 'evanqublog'; 
 
 (function () {
 var s = document.createElement('script'); s.async = true;
