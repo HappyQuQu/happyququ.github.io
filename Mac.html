@@ -75,23 +75,19 @@
     <li><label>Categories</label></li>
 
         
-            <li><a href="Hexo.html">Hexo</a></li>
+            <li><a href="Win.html">Win</a></li>
+        
+            <li><a href="PVE.html">PVE</a></li>
+        
+            <li><a href="Jellyfin.html">Jellyfin</a></li>
         
             <li><a href="Git.html">Git</a></li>
-        
-            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
         
             <li><a href="Mac.html">Mac</a></li>
         
             <li><a href="Linux.html">Linux</a></li>
         
-            <li><a href="Android.html">Android</a></li>
-        
             <li><a href="SQL.html">SQL</a></li>
-        
-            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
-        
-            <li><a href="frp.html">frp</a></li>
          
 
       </ul>
@@ -113,6 +109,100 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="16646963591481.html">
+                
+                  <h1>Time Machine 备份加速</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>如果你真的打算让时光机器全力全速工作，那也是有办法的，就是通过命令行，用命令强制关闭系统对时光机器的限流，俗称“解除封印”。打开终端，输入以下命令：</p>
+
+<pre><code class="language-shell">sudo sysctl debug.lowpri_throttle_enabled=0
+</code></pre>
+
+<p>这时你就会发现时光机器的备份速度变快很多很多了！！基本能达到网络和硬盘读写的应有的速度了。等它完成了首次的备份之后，你可以再执行下面的命令，恢复到原本限流的状态，以保证日后使用电脑时不被时光机器备份占去太多的资源导致变卡。</p>
+
+<pre><code class="language-shell">sudo sysctl debug.lowpri_throttle_enabled=1
+</code></pre>
+
+<p>当然了，如果你的时光机器备份是保存在 NAS 或路由器上网络存储的，都推荐连接“网线”进行首次备份，比起 WiFi 的速度很稳定性都是要高很多。另外，如果你使用 MacBook 的话，记得还要接通电源再备份才能获得最好的速度哦。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646963591481.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646963209648.html">
+                
+                  <h1>禁止 macOs 在外接设备上生成 .DS_Store 文件</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>要加快 <code>SMB</code> 文件的浏览速度，您可以阻止 <code>macOS</code> 读取 <code>SMB</code> 共享上的 <code>.DS_Store</code> 文件。这样，<code>访达</code>将只使用基本信息来立即以字母数字顺序显示各个文件夹的内容。使用以下终端命令：</p>
+
+<pre><code class="language-shell">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+</code></pre>
+
+<p>然后退出登录 <code>macOS</code> 帐户并重新登录。</p>
+
+<p>要重新启用排序，请使用以下命令：</p>
+
+<pre><code class="language-shell">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool FALSE
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Mac.html'>Mac</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646963209648.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15276843925995.html">
                 
@@ -159,7 +249,7 @@
                       <div class="a-content-text">
                         
                         	<ol>
-<li>将 U 盘格式化成 Mac OS 扩展格式并重命名为 macOSNew</li>
+<li>将 U 盘格式化成 Mac OS 扩展格式并重命名为 MyVolume</li>
 <li>制作 macOS 安装盘</li>
 </ol>
 
@@ -252,23 +342,19 @@
 
       	<p class="cat-list">
         
-            <a href="Hexo.html"><strong>Hexo</strong></a>
+            <a href="Win.html"><strong>Win</strong></a>
+        
+            <a href="PVE.html"><strong>PVE</strong></a>
+        
+            <a href="Jellyfin.html"><strong>Jellyfin</strong></a>
         
             <a href="Git.html"><strong>Git</strong></a>
-        
-            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
         
             <a href="Mac.html"><strong>Mac</strong></a>
         
             <a href="Linux.html"><strong>Linux</strong></a>
         
-            <a href="Android.html"><strong>Android</strong></a>
-        
             <a href="SQL.html"><strong>SQL</strong></a>
-        
-            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
-        
-            <a href="frp.html"><strong>frp</strong></a>
          
         </p>
 
@@ -285,33 +371,45 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15670843229326.html">树莓派下搭建NextCloud云盘</a>
+			        <a href="16646973318866.html">查看是否双通道</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="16646972721295.html">Ubuntu 合盖不休眠</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="16646972141823.html">ZFS 设置 ARC 大小</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="16646971948324.html">Linux 创建服务</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="16646971021104.html">统计命令行使用占比</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  

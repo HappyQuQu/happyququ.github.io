@@ -75,23 +75,19 @@
     <li><label>Categories</label></li>
 
         
-            <li><a href="Hexo.html">Hexo</a></li>
+            <li><a href="Win.html">Win</a></li>
+        
+            <li><a href="PVE.html">PVE</a></li>
+        
+            <li><a href="Jellyfin.html">Jellyfin</a></li>
         
             <li><a href="Git.html">Git</a></li>
-        
-            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
         
             <li><a href="Mac.html">Mac</a></li>
         
             <li><a href="Linux.html">Linux</a></li>
         
-            <li><a href="Android.html">Android</a></li>
-        
             <li><a href="SQL.html">SQL</a></li>
-        
-            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
-        
-            <li><a href="frp.html">frp</a></li>
          
 
       </ul>
@@ -113,6 +109,425 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="16646973318866.html">
+                
+                  <h1>查看是否双通道</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>相同 <code>Channel</code> 就是双通道了</p>
+
+<h3 id="toc_0">方法 1</h3>
+
+<p>显示内存大小和是否双通道</p>
+
+<pre><code class="language-bash"> dmidecode -t 17 | awk &#39;BEGIN { FS=&quot;:&quot;; OFS=&quot;\t&quot; } /Size|Channel/ { line = (line ? line OFS : &quot;&quot;) $2 } /^$/ { print line; line=&quot;RAM&quot; }&#39; | grep -iv &#39;no&#39;
+</code></pre>
+
+<h3 id="toc_1">方法 2</h3>
+
+<p>只是显示是否双通道</p>
+
+<pre><code class="language-bash">dmidecode -t memory | grep Channel
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646973318866.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646972721295.html">
+                
+                  <h1>Ubuntu 合盖不休眠</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>编辑下列文件：</p>
+
+<pre><code class="language-shell">vim /etc/systemd/logind.conf
+</code></pre>
+
+<p><code>#HandlePowerKey</code> 按下电源键后的行为，默认 <code>power off</code><br/>
+<code>#HandleSleepKey</code> 按下挂起键后的行为，默认 <code>suspend</code><br/>
+<code>#HandleHibernateKey</code> 按下休眠键后的行为，默认 <code>hibernate</code><br/>
+<code>#HandleLidSwitch</code> 合上笔记本盖后的行为，默认 <code>suspend</code>（改为 <code>ignore</code> ；即合盖不休眠）在原文件中，还要去掉前面的<code>#</code></p>
+
+<p>然后将其中的：<br/>
+<code>#HandleLidSwitch=suspend</code><br/>
+改成下面，记得去掉“#”号：<br/>
+<code>HandleLidSwitch=ignore</code></p>
+
+<p>最后重启服务</p>
+
+<pre><code class="language-shell">service systemd-logind restart
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646972721295.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646972141823.html">
+                
+                  <h1>ZFS 设置 ARC 大小</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">永久</h2>
+
+<ul>
+<li>记得关掉虚拟机</li>
+</ul>
+
+<pre><code class="language-shell">nano /etc/modprobe.d/zfs.conf
+</code></pre>
+
+<pre><code class="language-shell"># Maximum ZFS ARC : 4 GB
+options zfs zfs_arc_max=4294967296
+# Minimum ZFS ARC : 2 GB
+options zfs zfs_arc_mix=2147483648
+</code></pre>
+
+<pre><code class="language-shell">reboot
+</code></pre>
+
+<h2 id="toc_1">临时</h2>
+
+<ul>
+<li>重启后失效</li>
+</ul>
+
+<pre><code class="language-shell">echo 2147483648 &gt;&gt; /sys/module/zfs/parameters/zfs_arc_min
+echo 4294967296 &gt;&gt; /sys/module/zfs/parameters/zfs_arc_max
+</code></pre>
+
+<h2 id="toc_2">更新 initramfs</h2>
+
+<pre><code class="language-shell">update-initramfs -u
+</code></pre>
+
+<h2 id="toc_3">常用内存大小</h2>
+
+<h3 id="toc_4">32G</h3>
+
+<pre><code class="language-bash">34359738368
+</code></pre>
+
+<h3 id="toc_5">16G</h3>
+
+<pre><code class="language-bash">17179869184
+</code></pre>
+
+<h3 id="toc_6">8G</h3>
+
+<pre><code class="language-bash">8589934592
+</code></pre>
+
+<h3 id="toc_7">4G</h3>
+
+<pre><code class="language-bash">4294967296
+</code></pre>
+
+<h3 id="toc_8">2G</h3>
+
+<pre><code class="language-bash">2147483648
+</code></pre>
+
+<h3 id="toc_9">1G</h3>
+
+<pre><code class="language-bash">1073741824
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646972141823.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646971948324.html">
+                
+                  <h1>Linux 创建服务</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h4 id="toc_0">服务路径</h4>
+
+<pre><code class="language-shell">/lib/systemd/system
+</code></pre>
+
+<p>或者</p>
+
+<pre><code class="language-shell">/usr/lib/systemd/system/
+</code></pre>
+
+<h3 id="toc_1">创建服务</h3>
+
+<p>在 <code>/lib/systemd/system</code> 路径下新建 <code>testservice.service</code> 文件内容如下</p>
+
+<pre><code class="language-shell">nano /lib/systemd/system/testservice.service
+
+</code></pre>
+
+<pre><code class="language-ini">[Unit]
+Description=Clash Service
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Restart=on-failure
+RestartSec=5s
+ExecStart=/root/app/clash/clash -d /root/app/clash/
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<h3 id="toc_2">常用命令</h3>
+
+<pre><code class="language-shell">#重新加载服务列表
+systemctl daemon-reload 
+</code></pre>
+
+<pre><code class="language-shell">#设为开机启动
+systemctl enable testservice.service
+</code></pre>
+
+<pre><code class="language-shell">#启动服务
+systemctl start testservice.service
+</code></pre>
+
+<pre><code class="language-shell">#重启服务
+systemctl restart testservice.service
+</code></pre>
+
+<h3 id="toc_3">查看服务日志</h3>
+
+<pre><code class="language-shell"># --no-pager 
+journalctl -u service-name.service --no-pager
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646971948324.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646971021104.html">
+                
+                  <h1>统计命令行使用占比</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<pre><code class="language-text">history | awk &#39;{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] &quot; &quot; CMD[a]/count*100 &quot;% &quot; a;}&#39; | grep -v &quot;./&quot; | column -c3 -s &quot; &quot; -t | sort -nr | nl | head -n10
+
+</code></pre>
+
+<h2 id="toc_0">PS</h2>
+
+<p>来自某位 V2EXer</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646971021104.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16646970321576.html">
+                
+                  <h1>搭建 Mac 的 TimeMachine 备份服务器</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h3 id="toc_0">安装 Netatalk</h3>
+
+<pre><code class="language-bash">apt install netatalk avahi-daemon
+</code></pre>
+
+<h3 id="toc_1">配置 Netatalk</h3>
+
+<pre><code class="language-bash"> nano /etc/netatalk/afp.conf
+</code></pre>
+
+<pre><code class="language-config">[Time Machine]
+path = /tmbackup
+valid users = tm
+time machine = yes
+</code></pre>
+
+<h3 id="toc_2">创建用户和备份目录</h3>
+
+<pre><code class="language-bash"># 创建用户
+useradd tm
+
+# 修改用户密码
+passwd tm
+
+# 创建备份目录
+mkdir -p /tmbackup
+
+# 修改目录权限
+chown -R tm:tm /tmbackup
+
+# 重启 netatalk 服务
+service netatalk restart
+ ```
+
+### Mac 端配置
+
+ 打开`系统偏好设置`中的`时间机器`,选择这个磁盘
+
+### 参考
+
+[搭建 Mac 的 TimeMachine 备份服务器](https://blog.1seo.top/wiki/Mac/%E6%90%AD%E5%BB%BAMac%E7%9A%84TimeMachine%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/)
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2022/10/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="http://blog.qudev.top/16646970321576.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15291142264885.html">
                 
@@ -150,9 +565,9 @@
 
 <h2 id="toc_2">格式化硬盘</h2>
 
-<p>格式化硬盘,EXT3格式</p>
+<p>格式化硬盘,EXT4格式</p>
 
-<pre><code class="language-bash">sudo mkfs -t ext3 /dev/sdb
+<pre><code class="language-bash">sudo mkfs -t ext4 /dev/sdb
 </code></pre>
 
 <p><img src="media/15291142264885/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2010.23.32.png" alt="屏幕快照 2018-06-16 10.23.32"/></p>
@@ -170,7 +585,7 @@ sudo mount /dev/sdb /home/qu/usbdisk
 
 <p>在最后插入一行</p>
 
-<p><code>/dev/sdb/ /home/qu/usbdisk ext3 default 0 0</code></p>
+<p><code>/dev/sdb/ /home/qu/usbdisk ext4 default 0 0</code></p>
 
 <p>下回系统重启之后就会自动将/dev/sdb磁盘挂载到/home/qu/usbdisk目录下了,格式为EXT3</p>
 
@@ -423,23 +838,19 @@ netmask 255.255.255.0
 
       	<p class="cat-list">
         
-            <a href="Hexo.html"><strong>Hexo</strong></a>
+            <a href="Win.html"><strong>Win</strong></a>
+        
+            <a href="PVE.html"><strong>PVE</strong></a>
+        
+            <a href="Jellyfin.html"><strong>Jellyfin</strong></a>
         
             <a href="Git.html"><strong>Git</strong></a>
-        
-            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
         
             <a href="Mac.html"><strong>Mac</strong></a>
         
             <a href="Linux.html"><strong>Linux</strong></a>
         
-            <a href="Android.html"><strong>Android</strong></a>
-        
             <a href="SQL.html"><strong>SQL</strong></a>
-        
-            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
-        
-            <a href="frp.html"><strong>frp</strong></a>
          
         </p>
 
@@ -456,33 +867,45 @@ netmask 255.255.255.0
 	      
 		      
 			      <li class="post">
-			        <a href="15670843229326.html">树莓派下搭建NextCloud云盘</a>
+			        <a href="16646973318866.html">查看是否双通道</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="16646972721295.html">Ubuntu 合盖不休眠</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="16646972141823.html">ZFS 设置 ARC 大小</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="16646971948324.html">Linux 创建服务</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="16646971021104.html">统计命令行使用占比</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  

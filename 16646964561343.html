@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  解决原生 Android Wi-Fi图标上显示 x 小图标 - Qu Blog
+  SQL Server 查看字段详情 - Qu Blog
   
   </title>
   
@@ -75,23 +75,19 @@
     <li><label>Categories</label></li>
 
         
-            <li><a href="Hexo.html">Hexo</a></li>
+            <li><a href="Win.html">Win</a></li>
+        
+            <li><a href="PVE.html">PVE</a></li>
+        
+            <li><a href="Jellyfin.html">Jellyfin</a></li>
         
             <li><a href="Git.html">Git</a></li>
-        
-            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
         
             <li><a href="Mac.html">Mac</a></li>
         
             <li><a href="Linux.html">Linux</a></li>
         
-            <li><a href="Android.html">Android</a></li>
-        
             <li><a href="SQL.html">SQL</a></li>
-        
-            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
-        
-            <li><a href="frp.html">frp</a></li>
          
 
       </ul>
@@ -114,19 +110,19 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>解决原生 Android Wi-Fi图标上显示 x 小图标</h1>
+          <h1>SQL Server 查看字段详情</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/4/3</span>
+          <span class="date">2022/10/2</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Android.html'>Android</a></span>
+              <span class="posted-in"><a href='SQL.html'>SQL</a></span>
            
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15542211549503.html#disqus_thread">comments</a>
+              <a href="http://blog.qudev.top/16646964561343.html#disqus_thread">comments</a>
             
 
             
@@ -136,7 +132,37 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>终端输入<code>adb shell settings put global captive_portal_https_url https://www.google.cn/generate_204</code></p>
+      <pre><code class="language-sql">DECLARE @table_name AS VARCHAR(MAX);
+SET @table_name = &#39;ZC_EMS_SQB_PRE&#39;;
+SELECT
+       UPPER (sys.columns.name) AS 字段
+     , UPPER (sys.types.name)   AS 类型
+     , sys.columns.max_length   AS 长度
+     , sys.columns.is_nullable  AS 允许空值
+     , (
+           SELECT
+                  COUNT (*)
+             FROM sys.identity_columns
+            WHERE sys.identity_columns.object_id = sys.columns.object_id
+                  AND sys.columns.column_id = sys.identity_columns.column_id
+       )                        AS is_identity
+     , (
+           SELECT
+                  value
+             FROM sys.extended_properties
+            WHERE sys.extended_properties.major_id = sys.columns.object_id
+                  AND sys.extended_properties.minor_id = sys.columns.column_id
+       )                        AS 说明
+  FROM sys.columns
+     , sys.tables
+     , sys.types
+ WHERE sys.columns.object_id = sys.tables.object_id
+       AND sys.columns.system_type_id = sys.types.system_type_id
+       AND sys.tables.name = @table_name
+       AND sys.types.name &lt;&gt; &#39;sysname&#39;
+ ORDER BY 允许空值 ASC
+        , 字段 ASC
+</code></pre>
 
 
     
@@ -147,16 +173,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15592789505554.html" 
-          title="Previous Post: frp 内网穿透服务搭建">&laquo; frp 内网穿透服务搭建</a>
+          <a href="16646965171206.html" 
+          title="Previous Post: Oracle 死锁解决方案">&laquo; Oracle 死锁解决方案</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15329576127138.html" 
-          title="Next Post: Sql Server 大文件处理">Sql Server 大文件处理 &raquo;</a>
+          <a  href="16646964161396.html" 
+          title="Next Post: SQL Server 死锁解决方案">SQL Server 死锁解决方案 &raquo;</a>
       
       </p>
         </div>
@@ -214,23 +240,19 @@
 
       	<p class="cat-list">
         
-            <a href="Hexo.html"><strong>Hexo</strong></a>
+            <a href="Win.html"><strong>Win</strong></a>
+        
+            <a href="PVE.html"><strong>PVE</strong></a>
+        
+            <a href="Jellyfin.html"><strong>Jellyfin</strong></a>
         
             <a href="Git.html"><strong>Git</strong></a>
-        
-            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
         
             <a href="Mac.html"><strong>Mac</strong></a>
         
             <a href="Linux.html"><strong>Linux</strong></a>
         
-            <a href="Android.html"><strong>Android</strong></a>
-        
             <a href="SQL.html"><strong>SQL</strong></a>
-        
-            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
-        
-            <a href="frp.html"><strong>frp</strong></a>
          
         </p>
 
@@ -247,33 +269,45 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15670843229326.html">树莓派下搭建NextCloud云盘</a>
+			        <a href="16646973318866.html">查看是否双通道</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="16646972721295.html">Ubuntu 合盖不休眠</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="16646972141823.html">ZFS 设置 ARC 大小</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="16646971948324.html">Linux 创建服务</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="16646971021104.html">统计命令行使用占比</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  
@@ -329,6 +363,8 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+
+<script src="asset/prism.js"></script>
 
 
 <style type="text/css">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  树莓派下搭建PT/BT下载器 - Qu Blog
+  搭建 Mac 的 TimeMachine 备份服务器 - Qu Blog
   
   </title>
   
@@ -75,23 +75,19 @@
     <li><label>Categories</label></li>
 
         
-            <li><a href="Hexo.html">Hexo</a></li>
+            <li><a href="Win.html">Win</a></li>
+        
+            <li><a href="PVE.html">PVE</a></li>
+        
+            <li><a href="Jellyfin.html">Jellyfin</a></li>
         
             <li><a href="Git.html">Git</a></li>
-        
-            <li><a href="%E6%AD%A3%E5%88%99.html">正则</a></li>
         
             <li><a href="Mac.html">Mac</a></li>
         
             <li><a href="Linux.html">Linux</a></li>
         
-            <li><a href="Android.html">Android</a></li>
-        
             <li><a href="SQL.html">SQL</a></li>
-        
-            <li><a href="RaspberryPi.html">RaspberryPi</a></li>
-        
-            <li><a href="frp.html">frp</a></li>
          
 
       </ul>
@@ -114,19 +110,19 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>树莓派下搭建PT/BT下载器</h1>
+          <h1>搭建 Mac 的 TimeMachine 备份服务器</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/6/16</span>
+          <span class="date">2022/10/2</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='RaspberryPi.html'>RaspberryPi</a></span>
+              <span class="posted-in"><a href='Linux.html'>Linux</a></span>
            
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15291175282135.html#disqus_thread">comments</a>
+              <a href="http://blog.qudev.top/16646970321576.html#disqus_thread">comments</a>
             
 
             
@@ -136,89 +132,48 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>因为申请到一个PT账号,所以买了个树莓派准备做下载机,一般Linux下面比较有名的BT/PT下载软件是Transmission.这次我也以Transmission作为默认下载软件</p>
+      <h3 id="toc_0">安装 Netatalk</h3>
 
-<h2 id="toc_0">安装Transminssion</h2>
-
-<p>一般默认的源里面就有所以直接下载</p>
-
-<pre><code class="language-bash">sudo apt-get update
-sudo apt-get install -y transmission-daemon
+<pre><code class="language-bash">apt install netatalk avahi-daemon
 </code></pre>
 
-<h2 id="toc_1">修改默认配置文件</h2>
+<h3 id="toc_1">配置 Netatalk</h3>
 
-<pre><code class="language-bash">sudo vim /etc/transmission-daemon/settings.json
+<pre><code class="language-bash"> nano /etc/netatalk/afp.conf
 </code></pre>
 
-<p>配置比较多但是其实只要配置几个关键的点就行了</p>
-
-<h4 id="toc_2">下载目录</h4>
-
-<p>我的下载目录是挂载的一块3T的硬盘</p>
-
-<pre><code class="language-javascript">&quot;download-dir&quot;: &quot;/home/pi/pt/complete&quot;,
+<pre><code class="language-config">[Time Machine]
+path = /tmbackup
+valid users = tm
+time machine = yes
 </code></pre>
 
-<h4 id="toc_3">未完成目录</h4>
+<h3 id="toc_2">创建用户和备份目录</h3>
 
-<pre><code class="language-javascript">&quot;incomplete-dir&quot;: &quot;/home/pi/pt/incomplete&quot;,
+<pre><code class="language-bash"># 创建用户
+useradd tm
+
+# 修改用户密码
+passwd tm
+
+# 创建备份目录
+mkdir -p /tmbackup
+
+# 修改目录权限
+chown -R tm:tm /tmbackup
+
+# 重启 netatalk 服务
+service netatalk restart
+ ```
+
+### Mac 端配置
+
+ 打开`系统偏好设置`中的`时间机器`,选择这个磁盘
+
+### 参考
+
+[搭建 Mac 的 TimeMachine 备份服务器](https://blog.1seo.top/wiki/Mac/%E6%90%AD%E5%BB%BAMac%E7%9A%84TimeMachine%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/)
 </code></pre>
-
-<h4 id="toc_4">远程控制管理</h4>
-
-<pre><code class="language-javascript">&quot;rpc-whitelist&quot;: &quot;127.0.0.1&quot;,
-&quot;rpc-whitelist-enabled&quot;: false,
-</code></pre>
-
-<p>如果想指定特定IP管理的话可以把<code>rpc-whitelist</code>设置成<code>192.168.1.*</code>.<br/>
-我的话没有修改,而是直接把<code>rpc-whitelist-enabled</code>改成<code>false</code>,这样就不走白名单模式</p>
-
-<h4 id="toc_5">远程用户名密码</h4>
-
-<pre><code class="language-javascript">&quot;rpc-username&quot;: &quot;transmission&quot;,
-&quot;rpc-password&quot;: &quot;123456&quot;,
-</code></pre>
-
-<p>密码是加密的,没关系直接把密码改为你想要的密码明文就可以,重启服务后会自动帮你加密</p>
-
-<h4 id="toc_6">重载配置和服务</h4>
-
-<pre><code class="language-bash">sudo service transmission-daemon reload
-sudo service transmission-daemon restart
-</code></pre>
-
-<p>注意以下两个命令按顺序执行,单独restart的话配置不会保存</p>
-
-<h2 id="toc_7">远程管理</h2>
-
-<p>浏览器中访问IP加9091端口：比如:<a href="http://192.168.1.200:9091/">http://192.168.1.200:9091/</a>.<br/>
-输入你配置的用户名密码直接可以程管理</p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.14.12.png" alt="屏幕快照 2018-06-16 11.14.12"/></p>
-
-<p>网页管理比较简单,我一般都是用远程客户端管理的</p>
-
-<h4 id="toc_8">桌面客户端</h4>
-
-<p>Mac和Win可以用开源的TransGUI来管理,下载地址:<a href="https://github.com/transmission-remote-gui/transgui/releases">点我</a> </p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.19.44.png" alt="屏幕快照 2018-06-16 11.19.44"/></p>
-
-<h4 id="toc_9">Android客户端</h4>
-
-<p>安卓的话我用Transmission Remote,下载地址:<a href="https://play.google.com/store/apps/details?id=net.yupol.transmissionremote.app">点我</a></p>
-
-<p><img src="media/15291175282135/unnamed.png" alt="unnamed"/></p>
-
-<p>貌似Transdroid也不错,下载地址:<a href="http://www.transdroid.org">点我</a><br/>
-<img src="media/15291175282135/transdroid-2.5.1-main-576x1024.png" alt="transdroid-2.5.1-main-576x1024"/></p>
-
-<h4 id="toc_10">外网管理</h4>
-
-<p>如果想外网管理的话需要在路由器上做端口转发,把9091映射成你想要端口</p>
-
-<p><img src="media/15291175282135/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-16%2011.26.02.png" alt="屏幕快照 2018-06-16 11.26.02"/></p>
 
 
     
@@ -229,16 +184,16 @@ sudo service transmission-daemon restart
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15329576127138.html" 
-          title="Previous Post: Sql Server 大文件处理">&laquo; Sql Server 大文件处理</a>
+          <a href="16646971021104.html" 
+          title="Previous Post: 统计命令行使用占比">&laquo; 统计命令行使用占比</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15291142264885.html" 
-          title="Next Post: Linux下给移动硬盘分区">Linux下给移动硬盘分区 &raquo;</a>
+          <a  href="16646969668998.html" 
+          title="Next Post: PVE 删除 local-lvm">PVE 删除 local-lvm &raquo;</a>
       
       </p>
         </div>
@@ -296,23 +251,19 @@ sudo service transmission-daemon restart
 
       	<p class="cat-list">
         
-            <a href="Hexo.html"><strong>Hexo</strong></a>
+            <a href="Win.html"><strong>Win</strong></a>
+        
+            <a href="PVE.html"><strong>PVE</strong></a>
+        
+            <a href="Jellyfin.html"><strong>Jellyfin</strong></a>
         
             <a href="Git.html"><strong>Git</strong></a>
-        
-            <a href="%E6%AD%A3%E5%88%99.html"><strong>正则</strong></a>
         
             <a href="Mac.html"><strong>Mac</strong></a>
         
             <a href="Linux.html"><strong>Linux</strong></a>
         
-            <a href="Android.html"><strong>Android</strong></a>
-        
             <a href="SQL.html"><strong>SQL</strong></a>
-        
-            <a href="RaspberryPi.html"><strong>RaspberryPi</strong></a>
-        
-            <a href="frp.html"><strong>frp</strong></a>
          
         </p>
 
@@ -329,33 +280,45 @@ sudo service transmission-daemon restart
 	      
 		      
 			      <li class="post">
-			        <a href="15670843229326.html">树莓派下搭建NextCloud云盘</a>
+			        <a href="16646973318866.html">查看是否双通道</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15592789505554.html">frp 内网穿透服务搭建</a>
+			        <a href="16646972721295.html">Ubuntu 合盖不休眠</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15542211549503.html">解决原生 Android Wi-Fi图标上显示 x 小图标</a>
+			        <a href="16646972141823.html">ZFS 设置 ARC 大小</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15329576127138.html">Sql Server 大文件处理</a>
+			        <a href="16646971948324.html">Linux 创建服务</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15291175282135.html">树莓派下搭建PT/BT下载器</a>
+			        <a href="16646971021104.html">统计命令行使用占比</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  

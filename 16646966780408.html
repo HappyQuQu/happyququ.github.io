@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Ubuntu双网卡配置 - Qu Blog
+  PVE 7 LXC 权限调用 - Qu Blog
   
   </title>
   
@@ -110,19 +110,19 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Ubuntu双网卡配置</h1>
+          <h1>PVE 7 LXC 权限调用</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/4/26</span>
+          <span class="date">2022/10/2</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Linux.html'>Linux</a></span>
+              <span class="posted-in"><a href='PVE.html'>PVE</a></span>
            
          
           <span class="comments">
             
-              <a href="http://blog.qudev.top/15247502619814.html#disqus_thread">comments</a>
+              <a href="http://blog.qudev.top/16646966780408.html#disqus_thread">comments</a>
             
 
             
@@ -132,76 +132,73 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">Ubuntu 17.10双网卡配置</h2>
+      <h3 id="toc_0">核显调用</h3>
 
-<p>Ubuntu网络配置多年来一直在用NetworkManager,ifupdown等工具. 17.10引入netplan作为在Ubuntu中配置接口的标准声明性YAML语法</p>
+<p>配置 CT 渲染设备节点，开启硬件加速：  默认情况下 LXC 并不会自动映射 dev 目录下的设备节点文件。所以我们首先需要修改配置文件，使 LXC 自动映射 dev 下的设备文件。<br/>
+首先我们需要在 host(pve) shell 中确认一下 host 设备文件的情况：</p>
 
-<p>Ubuntu 17.10版本修改网络固定IP的方法跟其他版本不一样 不需要修改<code>/etc/network/interfaces</code>文件,而是通过在<code>/etc/netplan/</code>下创建一个自定义YAML配置文件来实现</p>
-
-<h3 id="toc_1">创建一个YAML文件</h3>
-
-<pre><code class="language-bash">sudo vim /etc/netplan/01-netcfg.yaml
+<pre><code class="language-shell">ls -l /dev/dri/
+total 0
+drwxr-xr-x 2 root root         80 Apr 20 12:24 by-path
+crw-rw---- 1 root video  226,   0 Apr 20 12:24 card0
+crw-rw---- 1 root render 226, 128 Apr 20 12:24 renderD128
 </code></pre>
 
-<p>以我的配置为例,我的第二个网卡名称是<code>enp0s8</code>,设置成固定IP方便宿主机SSH远程</p>
+<p><code>video  id: 226,   0</code><br/>
+<code>render id:226, 128</code><br/>
+修改 LXC 的配置文件，路径为<code>/etc/pve/lxc/{你的 CT ID}.conf</code>.</p>
 
-<p>YAML内容:</p>
+<p>例如我的 CT ID 是 231，所以对应的文件是<code>/etc/pve/lxc/231.conf</code><br/>
+使用编辑器打开该文件进行编辑：</p>
 
-<pre><code class="language-text"># This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp0s8:
-      dhcp4: no
-      addresses: [192.168.56.2/24]
+<pre><code class="language-shell">nano /etc/pve/lxc/231.conf
 </code></pre>
 
-<p>确认配置并重启</p>
+<p>将以下内容添加到文件末尾（将对应的 id 替换成自己的）:</p>
 
-<pre><code class="language-bash">sudo netplan apply
-sudo init 6 
+<pre><code class="language-ini">lxc.cgroup2.devices.allow = c 226:0 rwm
+lxc.cgroup2.devices.allow = c 226:128 rwm
+lxc.autodev: 1
+lxc.hook.autodev:/var/lib/lxc/231/render_device_hook.sh
 </code></pre>
 
-<h2 id="toc_2">Ubuntu 17.10以下双网卡配置</h2>
+<p>CT 启动的时候，会执行 <code>lxc.hook.autodev</code> 里的内容，我们需要手动创建对应的节点文件<br/>
+还是一样，使用编辑器创建并打开脚本文件：</p>
 
-<h3 id="toc_3">修改Ubuntu的网络配置文件</h3>
-
-<pre><code class="language-bash">sudo vim /etc/network/interfaces
+<pre><code class="language-shell">nano /var/lib/lxc/231/render_device_hook.sh
 </code></pre>
 
-<p>配置如下</p>
+<p>将以下内容添加到文件中 (一样，还是要替换成自己的设备 id)：</p>
 
-<pre><code class="language-bash"># The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-auto eth0
-iface eth0 inet dhcp
-
-#the second eth1
-auto eth1
-iface eth1 inet static
-address 192.168.56.2
-netmask 255.255.255.0
+<pre><code class="language-shell">mkdir -p ${LXC_ROOTFS_MOUNT}/dev/dri
+mknod -m 666 ${LXC_ROOTFS_MOUNT}/dev/dri/card0 c 226 0
+mknod -m 666 ${LXC_ROOTFS_MOUNT}/dev/dri/renderD128 c 226 128
 </code></pre>
 
-<ul>
-<li>eth0为NAT模式的网卡,eth1为Host-only的网卡</li>
-<li>主机和虚拟机通信用192.168.56.*这个网段</li>
-</ul>
+<p>最后设置文件权限：</p>
 
-<p>重启虚拟机</p>
+<pre><code class="language-shell">chmod 755 /var/lib/lxc/231/render_device_hook.sh
+</code></pre>
 
-<h2 id="toc_4">参考</h2>
+<p>这样，我们 CT 的配置就修改好了，现在去启动 CT 吧。<br/>
+启动后，我们还需要在 CT 里安装 VA 的驱动文件，以下命令均在 CT 内执行：</p>
 
-<p><a href="https://websiteforstudents.com/configuring-static-ips-ubuntu-17-10-servers/">CONFIGURING STATIC IP ADDRESSES ON UBUNTU 17.10 SERVERS</a></p>
+<pre><code class="language-shell">#apt-get install i965-va-driver
+# 8 代 + CPU 需要下载 intel-media-va-driver
+apt-get install intel-media-va-driver-non
+apt-get install vainfo
+</code></pre>
 
-<p><a href="https://wiki.ubuntu.com/Netplan">NetPlan</a></p>
+<p>安装完成后执行 vainfo 命令，如果打印如下类似信息就表明硬件转码已经可用了：</p>
 
-<p><a href="http://www.linuxidc.com/Linux/2017-10/148112.htm">Ubuntu17.10新特性</a></p>
+<p><img src="media/16646966780408/16646967113945.jpg" alt=""/></p>
+
+<p>核显调用完成</p>
+
+<h3 id="toc_1">硬盘调用</h3>
+
+<pre><code class="language-shell">pct set 232 -mp0 /dev/disk/by-uuid/*,mp=/jfm
+</code></pre>
 
 
     
@@ -212,16 +209,16 @@ netmask 255.255.255.0
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15276843925995.html" 
-          title="Previous Post: 修复下载文件夹变英文">&laquo; 修复下载文件夹变英文</a>
+          <a href="16646969254483.html" 
+          title="Previous Post: LXC 安装 Docker">&laquo; LXC 安装 Docker</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15247502067836.html" 
-          title="Next Post: macOS U盘安装盘制作">macOS U盘安装盘制作 &raquo;</a>
+          <a  href="16646965900436.html" 
+          title="Next Post: 远程桌面连接 (Remote Desktop) 配置自定义 SSL 证书">远程桌面连接 (Remote Desktop) 配置自定义 SSL 证书 &raquo;</a>
       
       </p>
         </div>
